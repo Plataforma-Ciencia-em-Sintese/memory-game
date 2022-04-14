@@ -1,3 +1,5 @@
+~~~python
+# files
 main/
 	main.tscn
 	main.gd
@@ -18,12 +20,13 @@ uiux/
 	fonts/
 	icons/
 	themes/
-	
+~~~
 
-------
+---
 
+~~~python
+# custom_images.json
 
-custom_images.json
 {
 	"count": "10",
 	"path_list": [
@@ -32,3 +35,4 @@ custom_images.json
 		...
 	],
 }
+~~~
