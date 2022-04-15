@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/card/card.gd" type="Script" id=1]
+[ext_resource path="res://assets/card/local_images/alma_de_gato.png" type="Texture" id=2]
+[ext_resource path="res://assets/card/rounded_edges.shader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 3 )
+shader_param/radius = 1.0
+shader_param/animate = false
+shader_param/square_scale = 0.1
+
+[node name="CardButton" type="AspectRatioContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+script = ExtResource( 1 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+material = SubResource( 5 )
+margin_left = 420.0
+margin_right = 1500.0
+margin_bottom = 1080.0
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]
