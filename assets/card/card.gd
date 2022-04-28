@@ -7,11 +7,12 @@ extends AspectRatioContainer
 
 
 #  [SIGNALS]
-signal card_turned(state, image)
+signal card_turned(card)
+signal spin_completed
 
 
 #  [ENUMS]
-enum State {FRONT, BACK}
+enum State {FRONT, BACK, COMPLETED}
 
 
 #  [CONSTANTS]
@@ -28,6 +29,8 @@ var _card_front_image: Texture = null
 var _card_back_image: Texture = null
 var _current_state: int = State.FRONT \
 		setget set_current_state, get_current_state
+var _card_name: String = "" \
+		setget set_card_name, get_card_name
 
 
 #  [ONREADY_VARIABLES]
@@ -70,7 +73,17 @@ func set_card_image(image: Texture) -> void:
 	button.texture_normal = image
 	
 	if not image == _card_back_image:
-		_card_front_image = image 
+		_card_front_image = image
+
+
+func set_card_name(new_name: String) -> void:
+	new_name = new_name.replace("res://assets/card/local_images/", "")
+	new_name = new_name.replace(".png", "")
+	_card_name = new_name
+
+
+func get_card_name() -> String:
+	return _card_name
 
 
 func to_spin() -> void:
@@ -79,6 +92,7 @@ func to_spin() -> void:
 	button.rect_pivot_offset = Vector2(button.rect_size.x/2, button.rect_size.x/2)
 	button.disabled = true
 	
+	
 	tween.interpolate_property(button, "rect_scale:x", temporary_scale_x, 0.0, 0.18,
 			Tween.TRANS_LINEAR,Tween.EASE_OUT)
 	tween.start()
@@ -86,11 +100,13 @@ func to_spin() -> void:
 	yield(tween, "tween_completed")
 	match(get_current_state()):
 		State.FRONT:
-			set_card_image(_card_back_image)
 			set_current_state(State.BACK)
+			set_card_image(_card_back_image)
+			
 		State.BACK:
-			set_card_image(_card_front_image)
 			set_current_state(State.FRONT)
+			set_card_image(_card_front_image)
+			
 	
 	tween.interpolate_property(button, "rect_scale:x", 0.0, temporary_scale_x, 0.18,
 			Tween.TRANS_LINEAR,Tween.EASE_OUT)
@@ -98,14 +114,15 @@ func to_spin() -> void:
 	
 	yield(tween, "tween_completed")
 	button.disabled = false
+	emit_signal("spin_completed")
+	
 
 
 #  [PRIVATE_METHODS]
  
 
 #  [SIGNAL_METHODS]
-
-
 func _on_TextureButton_pressed() -> void:
 	to_spin()
-	emit_signal("card_turned", get_current_state(), get_current_image())
+	yield(self, "spin_completed")
+	emit_signal("card_turned", self)

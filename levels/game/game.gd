@@ -40,6 +40,7 @@ var _card_images: Array = [
 var _load_card_images: Array = []
 var _current_mode: int = GameMode.HARD \
 		setget set_current_mode, get_current_mode
+var turned_cards: Array = []
 
 
 #  [ONREADY_VARIABLES]
@@ -110,9 +111,10 @@ func random_number(start: int, end: int) -> int:
 	return rng.randi_range(start, end)
 
 
-func get_random_image() -> Texture:
+func get_random_image() -> String:
 	var random_index: int = random_number(0, (_card_images.size() -1))
-	var result: Texture = load(_load_card_images[random_index])
+#	var result: Texture = load(_load_card_images[random_index])
+	var result: String = _load_card_images[random_index]
 	_load_card_images.remove(random_index)
 	return result
 
@@ -139,11 +141,14 @@ func _start_easy_mode():
 	var total_cards: int = 6
 # warning-ignore:integer_division
 	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
-		var texture: Texture = get_random_image() #load("res://cards/papa_formiga_barrado.webp") 
+		var texture_path: String = get_random_image() #load("res://cards/papa_formiga_barrado.webp") 
+		var texture: Texture = load(texture_path)
 		for _j in range(0, 2):
 			var card := CardButton.instance()
 			grid.add_child(card)
 			card.set_card_image(texture)
+			card.set_card_name(texture_path)
+	
 	emit_signal("add_cards")
 	
 
@@ -155,11 +160,14 @@ func _start_medium_mode():
 	var total_cards: int = 12
 # warning-ignore:integer_division
 	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
-		var texture: Texture = get_random_image() #load("res://cards/papa_formiga_barrado.webp") 
+		var texture_path: String = get_random_image() #load("res://cards/papa_formiga_barrado.webp") 
+		var texture: Texture = load(texture_path)
 		for _j in range(0, 2):
 			var card := CardButton.instance()
 			grid.add_child(card)
 			card.set_card_image(texture)
+			card.set_card_name(texture_path)
+	
 	emit_signal("add_cards")
 
 
@@ -170,14 +178,52 @@ func _start_hard_mode():
 	var total_cards: int = 18
 # warning-ignore:integer_division
 	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
-		var texture: Texture = get_random_image() #load("res://cards/papa_formiga_barrado.webp") 
+		var texture_path: String = get_random_image() #load("res://cards/papa_formiga_barrado.webp") 
+		var texture: Texture = load(texture_path)
 		for _j in range(0, 2):
 			var card := CardButton.instance()
 			grid.add_child(card)
 			card.set_card_image(texture)
+			card.set_card_name(texture_path)
+			card.connect("card_turned", self, "_on_card_turned")
+			
 	emit_signal("add_cards")
 
 
 #  [SIGNAL_METHODS]
 func _on_add_cards() -> void:
 	shuffle_cards()
+
+
+func _on_card_turned(card_instance) -> void:
+	if turned_cards.size() < 2:
+		turned_cards.append(card_instance)
+		card_instance.button.disabled = true
+	
+	if turned_cards.size() == 2:
+		#desativar botoes
+		for card in grid.get_children():
+			card.button.disabled = true
+			
+		if not turned_cards[0].get_card_name() == turned_cards[1].get_card_name():
+			for card in grid.get_children():
+				if card.get_current_state() == card.State.FRONT:
+					yield(get_tree().create_timer(1.0), "timeout")
+					card.to_spin()
+			#ativar botoes
+			for card in grid.get_children():
+				card.button.disabled = false
+					
+					
+					
+		elif turned_cards[0].get_card_name() == turned_cards[1].get_card_name():
+			for card in turned_cards:
+				card.modulate = Color(1.0, 1.0, 1.0, 0.5)
+				card.button.disabled = true
+				card.set_current_state(card.State.COMPLETED)
+			#ativar botoes
+			for card in grid.get_children():
+				if card.get_current_state() == card.State.FRONT or card.get_current_state() == card.State.BACK:
+					card.button.disabled = false
+		turned_cards.clear()
+			
