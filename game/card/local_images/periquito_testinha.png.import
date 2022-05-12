@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/surucuá_de_barriga_amarela.png-0ebec4dd883aa6f2a76e0456fa7bef2f.stex"
+path="res://.import/periquito_testinha.png-326b454cc5ab6b408798c8f61375e269.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/local_images/surucuá_de_barriga_amarela.png"
-dest_files=[ "res://.import/surucuá_de_barriga_amarela.png-0ebec4dd883aa6f2a76e0456fa7bef2f.stex" ]
+source_file="res://game/card/local_images/periquito_testinha.png"
+dest_files=[ "res://.import/periquito_testinha.png-326b454cc5ab6b408798c8f61375e269.stex" ]
 
 [params]
 

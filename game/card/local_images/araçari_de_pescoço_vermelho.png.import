@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bico-virado-miúdo.png-18386178f3c1d995d0ccf2a7535c31bf.stex"
+path="res://.import/araçari_de_pescoço_vermelho.png-a2fb639e5dfba5cbd80315236614547e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/local_images/bico-virado-miúdo.png"
-dest_files=[ "res://.import/bico-virado-miúdo.png-18386178f3c1d995d0ccf2a7535c31bf.stex" ]
+source_file="res://game/card/local_images/araçari_de_pescoço_vermelho.png"
+dest_files=[ "res://.import/araçari_de_pescoço_vermelho.png-a2fb639e5dfba5cbd80315236614547e.stex" ]
 
 [params]
 

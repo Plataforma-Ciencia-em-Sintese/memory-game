@@ -34,7 +34,7 @@ extends Node
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
-	get_tree().change_scene("res://levels/game/game.tscn")
+	get_tree().change_scene("res://game/game.tscn")
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]

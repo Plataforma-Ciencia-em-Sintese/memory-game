@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tucano_de_bico_preto.png-a92f1717402c4633fe0c3557515cd6fb.stex"
+path="res://.import/arapaçu_pardo.png-5187674487c6d1ef278b1f831adf0fac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/local_images/tucano_de_bico_preto.png"
-dest_files=[ "res://.import/tucano_de_bico_preto.png-a92f1717402c4633fe0c3557515cd6fb.stex" ]
+source_file="res://game/card/local_images/arapaçu_pardo.png"
+dest_files=[ "res://.import/arapaçu_pardo.png-5187674487c6d1ef278b1f831adf0fac.stex" ]
 
 [params]
 

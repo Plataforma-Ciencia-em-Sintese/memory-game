@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/papa_formiga_barrado.png-6932bdaaf7fa48da90c71ca698b3642e.stex"
+path="res://.import/bico-virado-miúdo.png-c21d9da530920895b6c344a4959f7083.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/local_images/papa_formiga_barrado.png"
-dest_files=[ "res://.import/papa_formiga_barrado.png-6932bdaaf7fa48da90c71ca698b3642e.stex" ]
+source_file="res://game/card/local_images/bico-virado-miúdo.png"
+dest_files=[ "res://.import/bico-virado-miúdo.png-c21d9da530920895b6c344a4959f7083.stex" ]
 
 [params]
 

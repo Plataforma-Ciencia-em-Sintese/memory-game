@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/choquinha_de_flanco_branco.png-28bda9e13300932ea10d0a34b75dc543.stex"
+path="res://.import/back_card.png-ee285b23391dff8390d00c65d4f0fb26.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/local_images/choquinha_de_flanco_branco.png"
-dest_files=[ "res://.import/choquinha_de_flanco_branco.png-28bda9e13300932ea10d0a34b75dc543.stex" ]
+source_file="res://game/card/back_card.png"
+dest_files=[ "res://.import/back_card.png-ee285b23391dff8390d00c65d4f0fb26.stex" ]
 
 [params]
 

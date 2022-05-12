@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/back_card.png-958685c9910f200975954cb0ba48eb7d.stex"
+path="res://.import/papa_formiga_barrado.png-d1a0f2716ee42d37eb75d209635d089f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/back_card.png"
-dest_files=[ "res://.import/back_card.png-958685c9910f200975954cb0ba48eb7d.stex" ]
+source_file="res://game/card/local_images/papa_formiga_barrado.png"
+dest_files=[ "res://.import/papa_formiga_barrado.png-d1a0f2716ee42d37eb75d209635d089f.stex" ]
 
 [params]
 

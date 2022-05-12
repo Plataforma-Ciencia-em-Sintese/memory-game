@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/alma_de_gato.png-7769191a1bec1960c20a07c4f43ec2e6.stex"
+path="res://.import/sai_de_perna_amarela.png-e121dce772ac0bd0a0cd477f09e8f80b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/local_images/alma_de_gato.png"
-dest_files=[ "res://.import/alma_de_gato.png-7769191a1bec1960c20a07c4f43ec2e6.stex" ]
+source_file="res://game/card/local_images/sai_de_perna_amarela.png"
+dest_files=[ "res://.import/sai_de_perna_amarela.png-e121dce772ac0bd0a0cd477f09e8f80b.stex" ]
 
 [params]
 

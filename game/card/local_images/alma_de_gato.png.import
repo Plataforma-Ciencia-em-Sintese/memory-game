@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/araçari_de_pescoço_vermelho.png-1ce8b5856947c4aae731896046281ca1.stex"
+path="res://.import/alma_de_gato.png-5b0a5bab2b58916454a8be4066bc09fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/card/local_images/araçari_de_pescoço_vermelho.png"
-dest_files=[ "res://.import/araçari_de_pescoço_vermelho.png-1ce8b5856947c4aae731896046281ca1.stex" ]
+source_file="res://game/card/local_images/alma_de_gato.png"
+dest_files=[ "res://.import/alma_de_gato.png-5b0a5bab2b58916454a8be4066bc09fb.stex" ]
 
 [params]
 
