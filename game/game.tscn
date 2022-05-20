@@ -87,7 +87,7 @@ margin_bottom = 86.0
 size_flags_horizontal = 3
 custom_constants/separation = 70
 
-[node name="Points" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
+[node name="Time" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
 margin_top = 21.0
 margin_right = 300.0
 margin_bottom = 64.0
@@ -95,11 +95,12 @@ rect_min_size = Vector2( 300, 0 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Pontos: 0000"
+text = "Tempo: 00:00:00"
 align = 1
 valign = 1
 
 [node name="TextureProgress" type="ProgressBar" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
+visible = false
 margin_left = 370.0
 margin_top = 23.0
 margin_right = 1184.0
@@ -121,16 +122,16 @@ text = ""
 align = 1
 valign = 1
 
-[node name="Record" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
-margin_left = 1254.0
+[node name="FailedAttempt" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
+margin_left = 370.0
 margin_top = 21.0
-margin_right = 1554.0
+margin_right = 670.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 300, 0 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Recorde: 0000"
+text = "Tentativas: 0"
 align = 1
 valign = 1
 
@@ -171,4 +172,8 @@ custom_constants/vseparation = 10
 custom_constants/hseparation = 10
 columns = 3
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
+
 [connection signal="pressed" from="VBoxContainer/BarContainer/HBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

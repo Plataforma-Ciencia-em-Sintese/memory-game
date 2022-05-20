@@ -8,6 +8,8 @@ extends Control
 
 #  [SIGNALS]
 signal add_cards
+signal failed_attempt
+signal start_timer
 
 
 #  [ENUMS]
@@ -41,10 +43,17 @@ var _load_card_images: PoolStringArray = []
 var _current_mode: int = GameMode.EASY \
 		setget set_current_mode, get_current_mode
 var turned_cards: Array = []
+var _timer_has_started: bool = false \
+		setget set_timer_has_starded, get_timer_has_started
+var _timer_counter: int = 0 \
+		setget set_timer_counter, get_timer_counter
 
 
 #  [ONREADY_VARIABLES]
 onready var grid := $VBoxContainer/GameContainer/AspectRatioContainer/GridContainer
+onready var timer_label := $VBoxContainer/BarContainer/HBoxContainer/HBoxContainer/Time
+onready var timer:= $Timer
+onready var failed_attempt_label := $VBoxContainer/BarContainer/HBoxContainer/HBoxContainer/FailedAttempt
 onready var CardButton := preload("res://game/card/card.tscn")
 
 
@@ -55,12 +64,15 @@ onready var CardButton := preload("res://game/card/card.tscn")
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
-	self.connect("add_cards", self, "_on_add_cards")
+	connect("add_cards", self, "_on_add_cards")
+	connect("failed_attempt", self, "_on_failed_attempt")
+	connect("start_timer", self, "_on_start_timer")
 	set_current_mode(GameMode.EASY)
+	
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
-#func _process(_delta: float)%VOID_RETURN:
+#func _process(_delta: float) -> void:
 #	pass
 
 
@@ -90,6 +102,22 @@ func set_current_mode(mode: int) -> void:
 
 func get_current_mode() -> int:
 	return _current_mode
+
+
+func set_timer_has_starded(new_value: bool) -> void:
+	_timer_has_started = new_value
+
+
+func get_timer_has_started() -> bool:
+	return _timer_has_started
+
+
+func set_timer_counter(new_value: int) -> void:
+	_timer_counter = new_value
+
+
+func get_timer_counter() -> int:
+	return _timer_counter
 
 
 func load_card_images() -> void: #path: String) -> void:
@@ -170,12 +198,23 @@ func _make_grid(mode: int):
 	emit_signal("add_cards")
 
 
+func _reset_counters() -> void:
+	timer.stop()
+	set_timer_has_starded(false)
+	set_timer_counter(0)
+	yield(get_tree().create_timer(1.0), "timeout") # temporary until set theme template
+	timer_label.text = "Tempo: 00:00:00"
+	failed_attempt_label.text = "Tentativas: 0"
+
+
 #  [SIGNAL_METHODS]
 func _on_add_cards() -> void:
 	shuffle_cards()
 
 
 func _on_card_turned(card_instance) -> void:
+	emit_signal("start_timer")
+	
 	if turned_cards.size() == 0:
 		turned_cards.append(card_instance)
 		return
@@ -192,12 +231,23 @@ func _on_card_turned(card_instance) -> void:
 			turned_cards[0].to_spin()
 			yield(turned_cards[0], "spin_completed")
 			turned_cards.clear()
+			emit_signal("failed_attempt")
 			
 		for card in grid.get_children():
 			if card.get_current_state() == card.State.BACK:
 				card.disabled = false
 
 	is_full_level()
+
+
+func _on_start_timer() -> void:
+	if not get_timer_has_started():
+		set_timer_has_starded(true)
+		timer.start()
+
+
+func _on_failed_attempt() -> void:
+	failed_attempt_label.text = "Tentativas: " + str(int(failed_attempt_label.text) + 1)
 
 
 func is_full_level() -> void:
@@ -208,6 +258,7 @@ func is_full_level() -> void:
 				remaining_pairs_counter += 1
 	
 	if remaining_pairs_counter == 0:
+		_reset_counters()
 		yield(get_tree().create_timer(1.0), "timeout")
 		match(get_current_mode()):
 			GameMode.EASY:
@@ -219,11 +270,18 @@ func is_full_level() -> void:
 
 
 func _on_Restart_pressed() -> void:
+	_reset_counters()
 	if turned_cards.empty():
 		for card in grid.get_children():
 			card.set_current_state(card.State.FRONT)
 			card.disabled = false
 		shuffle_cards()
 		show_cards(1.0)
+
+
+func _on_Timer_timeout() -> void:
+	var milliseconds: int = get_timer_counter()
+	milliseconds += 1
+	set_timer_counter(milliseconds)
 	
-	
+	timer_label.text = "Tempo: %02d:%02d:%02d" % [(milliseconds/1000) % 60, (milliseconds/100) % 60, milliseconds % 100]
