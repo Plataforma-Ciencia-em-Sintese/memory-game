@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="JogoDaMemoria"
+config/name="Memory Game"
 run/main_scene="res://main/main.tscn"
 config/icon="res://icon.png"
 
