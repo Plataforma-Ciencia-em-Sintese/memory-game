@@ -23,13 +23,18 @@
 # [UNRELEASED] - YYYY-MM-DD
 
 ### ADDED
+- time counter implementation.
+
 
 ### CHANGED
+- new text font and license.
+- theme implementation for game scene.
 
 ### DEPRECATED
 
 ### REMOVED
 
 ### FIXED
+- card caption display.
 
 ### SECURITY
