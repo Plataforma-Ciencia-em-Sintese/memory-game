@@ -285,3 +285,7 @@ func _on_Timer_timeout() -> void:
 	set_timer_counter(seconds)
 	
 	timer_label.text = "%02d:%02d" % [(seconds/60) % 60, seconds % 60]
+
+
+func _on_ReturnMenu_pressed() -> void:
+	OS.window_fullscreen = !OS.window_fullscreen

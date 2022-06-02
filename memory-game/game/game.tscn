@@ -357,5 +357,6 @@ columns = 3
 
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="pressed" from="VBoxContainer/BarContainer/HBoxContainer/ReturnMenu" to="." method="_on_ReturnMenu_pressed"]
 [connection signal="pressed" from="VBoxContainer/BarContainer/HBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
