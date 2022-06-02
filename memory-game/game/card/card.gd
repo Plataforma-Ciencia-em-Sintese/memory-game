@@ -70,7 +70,7 @@ func set_current_state(state: int) -> void:
 		State.COMPLETED:
 			disabled = true
 			label.visible = true
-			self_modulate = Color(0.5, 0.5, 0.5, 1.0) 
+			self_modulate = Color(0.65, 0.65, 0.65, 1.0) 
 
 
 func get_current_state() -> int:
@@ -137,9 +137,9 @@ func _on_CardButton_pressed() -> void:
 
 
 func _on_CardButton_mouse_entered() -> void:
-	if get_current_state() == State.FRONT:
-		label.visible = true
-
+#	if get_current_state() == State.FRONT:
+#		label.visible = true
+	pass
 
 func _on_CardButton_mouse_exited() -> void:
 	if get_current_state() == State.FRONT:
