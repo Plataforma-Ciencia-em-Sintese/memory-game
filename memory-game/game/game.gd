@@ -203,7 +203,7 @@ func _reset_counters() -> void:
 	set_timer_has_starded(false)
 	set_timer_counter(0)
 	yield(get_tree().create_timer(1.0), "timeout") # temporary until set theme template
-	timer_label.text = "Tempo: 00:00:00"
+	timer_label.text = "00:00"
 	failed_attempt_label.text = "Tentativas: 0"
 
 
@@ -280,8 +280,8 @@ func _on_Restart_pressed() -> void:
 
 
 func _on_Timer_timeout() -> void:
-	var milliseconds: int = get_timer_counter()
-	milliseconds += 1
-	set_timer_counter(milliseconds)
+	var seconds: int = get_timer_counter()
+	seconds += 1
+	set_timer_counter(seconds)
 	
-	timer_label.text = "Tempo: %02d:%02d:%02d" % [(milliseconds/1000) % 60, (milliseconds/100) % 60, milliseconds % 100]
+	timer_label.text = "%02d:%02d" % [(seconds/60) % 60, seconds % 60]

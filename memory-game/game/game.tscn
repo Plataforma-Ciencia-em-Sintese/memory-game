@@ -89,13 +89,14 @@ custom_constants/separation = 70
 
 [node name="Time" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
 margin_top = 21.0
-margin_right = 300.0
+margin_right = 1554.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Tempo: 00:00:00"
+text = "00:00"
 align = 1
 valign = 1
 
@@ -123,6 +124,7 @@ align = 1
 valign = 1
 
 [node name="FailedAttempt" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
+visible = false
 margin_left = 370.0
 margin_top = 21.0
 margin_right = 670.0
@@ -173,7 +175,6 @@ custom_constants/hseparation = 10
 columns = 3
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.001
 
 [connection signal="pressed" from="VBoxContainer/BarContainer/HBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
