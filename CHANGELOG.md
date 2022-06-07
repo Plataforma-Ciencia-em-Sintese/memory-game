@@ -27,7 +27,7 @@
 
 
 ### CHANGED
-- new text font and license.
+- text font.
 - theme implementation for game scene.
 
 ### DEPRECATED
