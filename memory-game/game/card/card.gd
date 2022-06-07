@@ -106,7 +106,7 @@ func to_spin() -> void:
 	
 	rect_pivot_offset = Vector2(rect_size.x/2, rect_size.x/2)
 	
-	tween.interpolate_property(self, "rect_scale:x", temporary_scale_x, 0.0, 0.18,
+	tween.interpolate_property(self, "rect_scale:x", temporary_scale_x, 0.0, 0.1,
 			Tween.TRANS_LINEAR,Tween.EASE_OUT)
 	tween.start()
 	
@@ -117,7 +117,7 @@ func to_spin() -> void:
 		State.BACK:
 			set_current_state(State.FRONT)
 	
-	tween.interpolate_property(self, "rect_scale:x", 0.0, temporary_scale_x, 0.18,
+	tween.interpolate_property(self, "rect_scale:x", 0.0, temporary_scale_x, 0.1,
 			Tween.TRANS_LINEAR,Tween.EASE_OUT)
 	tween.start()
 	

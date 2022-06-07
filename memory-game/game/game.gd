@@ -50,7 +50,7 @@ var _timer_counter: int = 0 \
 
 
 #  [ONREADY_VARIABLES]
-onready var grid := $VBoxContainer/GameContainer/AspectRatioContainer/GridContainer
+onready var grid := $VBoxContainer/GameContainer/MarginContainer/GridContainer
 onready var timer_label := $VBoxContainer/BarContainer/HBoxContainer/HBoxContainer/Time
 onready var timer:= $Timer
 onready var failed_attempt_label := $VBoxContainer/BarContainer/HBoxContainer/HBoxContainer/FailedAttempt
@@ -87,17 +87,17 @@ func set_current_mode(mode: int) -> void:
 		GameMode.EASY:
 			load_card_images()
 			_make_grid(get_current_mode())
-			show_cards(1.0)
+			show_cards(0.5)
 
 		GameMode.MEDIUM:
 			load_card_images()
 			_make_grid(get_current_mode())
-			show_cards(1.0)
+			show_cards(0.5)
 			
 		GameMode.HARD:
 			load_card_images()
 			_make_grid(get_current_mode())
-			show_cards(1.0)
+			show_cards(0.5)
 
 
 func get_current_mode() -> int:
@@ -151,17 +151,18 @@ func get_random_image() -> String:
 
 
 func shuffle_cards() -> void:
-	# to spin positions
-	for card in grid.get_children():
-		var temporary_position: Vector2 = Vector2(0.0, 0.0)
-		var ramdom_card := grid.get_child(random_number(0, grid.get_children().size()-1))
-		temporary_position = card.get_position()
-		card.set_position(ramdom_card.get_position())
-		ramdom_card.set_position(temporary_position)
-		
-		var temporary_index: int = card.get_position_in_parent()
-		grid.move_child(card, ramdom_card.get_position_in_parent())
-		grid.move_child(ramdom_card, temporary_index)
+	var steps: int = 16
+	for _i in range(0, steps):
+		for card in grid.get_children():
+			var temporary_position: Vector2 = Vector2(0.0, 0.0)
+			var ramdom_card := grid.get_child(random_number(0, grid.get_children().size()-1))
+			temporary_position = card.get_position()
+			card.set_position(ramdom_card.get_position())
+			ramdom_card.set_position(temporary_position)
+			
+			var temporary_index: int = card.get_position_in_parent()
+			grid.move_child(card, ramdom_card.get_position_in_parent())
+			grid.move_child(ramdom_card, temporary_index)
 
 
 func show_cards(time: float) -> void:
