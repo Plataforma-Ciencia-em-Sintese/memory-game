@@ -36,6 +36,6 @@
 
 ### FIXED
 - card caption display.
-- UI elements and animation duration.
+- user interface elements and duration of animations.
 
 ### SECURITY
