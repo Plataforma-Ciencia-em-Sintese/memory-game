@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/fonts/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://game/game.gd" type="Script" id=2]
@@ -6,7 +6,7 @@
 
 [sub_resource type="StreamTexture" id=22]
 flags = 4
-load_path = "res://.import/bg_memoria.png-85e3357c421f90839f47283fca6191f7.stex"
+load_path = "res://.import/texture_default.png-b1de129b7d7ab1771f5dc90215b6cc09.stex"
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -93,28 +93,6 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.564706, 0.231373, 0.741176, 1 )
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-
-[sub_resource type="DynamicFont" id=4]
-size = 40
-use_mipmaps = true
-use_filter = true
-extra_spacing_top = -5
-extra_spacing_bottom = -5
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=7]
 size = 70
 use_filter = true
@@ -199,49 +177,54 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="BackGroundColor" type="ColorRect" parent="."]
+[node name="BackgroundColor" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.666667, 0.482353, 0.764706, 1 )
 
-[node name="Texture" type="TextureRect" parent="."]
-self_modulate = Color( 0.635294, 0.454902, 0.733333, 0.0705882 )
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+self_modulate = Color( 0, 0, 0, 0.0470588 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource( 22 )
 stretch_mode = 2
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -700.0
-margin_top = -540.0
-margin_right = 700.0
-margin_bottom = 526.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 420.0
+margin_top = 10.0
+margin_right = -420.0
+margin_bottom = -10.0
+__meta__ = {
+"_editor_description_": ""
+}
 
-[node name="BarContainer" type="PanelContainer" parent="VBoxContainer"]
-self_modulate = Color( 0.592157, 0.592157, 0.592157, 0 )
-margin_right = 1400.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer"]
+margin_right = 1080.0
+margin_bottom = 1060.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BarContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1393.0
-margin_bottom = 93.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/AspectRatioContainer"]
+margin_left = 10.0
+margin_right = 1070.0
+margin_bottom = 1060.0
+custom_constants/separation = 10
+
+[node name="BarContainer" type="HBoxContainer" parent="MarginContainer/AspectRatioContainer/VBoxContainer"]
+margin_right = 1060.0
+margin_bottom = 84.0
 custom_constants/separation = 20
 
-[node name="ReturnMenu" type="Button" parent="VBoxContainer/BarContainer/HBoxContainer"]
-margin_top = 1.0
-margin_right = 160.0
-margin_bottom = 85.0
-rect_min_size = Vector2( 60, 0 )
+[node name="Home" type="Button" parent="MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer"]
+margin_right = 84.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 84, 84 )
 focus_mode = 0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 0
+size_flags_vertical = 0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0.603922, 0.388235, 0.721569, 1 )
@@ -252,20 +235,13 @@ custom_styles/focus = SubResource( 13 )
 custom_styles/disabled = SubResource( 14 )
 custom_styles/normal = SubResource( 15 )
 enabled_focus_mode = 0
-text = "  "
+text = ""
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/BarContainer/HBoxContainer"]
-margin_left = 180.0
-margin_right = 1206.0
-margin_bottom = 86.0
-size_flags_horizontal = 3
-custom_constants/separation = 70
-
-[node name="Time" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
-margin_left = 363.0
-margin_right = 663.0
-margin_bottom = 86.0
-rect_min_size = Vector2( 300, 0 )
+[node name="Time" type="Label" parent="MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer"]
+margin_left = 450.0
+margin_right = 610.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 160, 84 )
 size_flags_horizontal = 6
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.333333, 0.211765, 0.396078, 1 )
@@ -276,53 +252,14 @@ text = "00:00"
 align = 1
 valign = 1
 
-[node name="TextureProgress" type="ProgressBar" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
-visible = false
-margin_left = 548.0
-margin_top = 23.0
-margin_right = 1026.0
-margin_bottom = 63.0
-rect_min_size = Vector2( 0, 40 )
-size_flags_horizontal = 3
-size_flags_vertical = 4
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
-page = 50.0
-percent_visible = false
-
-[node name="TimeIcon" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer/TextureProgress"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 4 )
-text = ""
-align = 1
-valign = 1
-
-[node name="FailedAttempt" type="Label" parent="VBoxContainer/BarContainer/HBoxContainer/HBoxContainer"]
-visible = false
-margin_left = 1254.0
-margin_top = 21.0
-margin_right = 1554.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 300, 0 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 5 )
-text = "Tentativas: 0"
-align = 1
-valign = 1
-
-[node name="Restart" type="Button" parent="VBoxContainer/BarContainer/HBoxContainer"]
-margin_left = 1226.0
-margin_top = 1.0
-margin_right = 1386.0
-margin_bottom = 85.0
-rect_min_size = Vector2( 60, 0 )
+[node name="Restart" type="Button" parent="MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer"]
+margin_left = 976.0
+margin_right = 1060.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 84, 84 )
 focus_mode = 0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 0
+size_flags_vertical = 0
 custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
@@ -334,40 +271,40 @@ custom_styles/focus = SubResource( 18 )
 custom_styles/disabled = SubResource( 19 )
 custom_styles/normal = SubResource( 20 )
 enabled_focus_mode = 0
-text = "  "
+text = ""
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="GameContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="GameContainer" type="PanelContainer" parent="MarginContainer/AspectRatioContainer/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_top = 104.0
-margin_right = 1400.0
-margin_bottom = 1066.0
+margin_top = 94.0
+margin_right = 1060.0
+margin_bottom = 1060.0
 size_flags_horizontal = 5
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 9 )
 
-[node name="Panel" type="Panel" parent="VBoxContainer/GameContainer"]
-margin_right = 1400.0
-margin_bottom = 962.0
+[node name="Panel" type="Panel" parent="MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer"]
+margin_right = 1060.0
+margin_bottom = 966.0
 custom_styles/panel = SubResource( 10 )
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/GameContainer"]
-margin_right = 1400.0
-margin_bottom = 962.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer"]
+margin_right = 1060.0
+margin_bottom = 966.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/GameContainer/MarginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1390.0
-margin_bottom = 952.0
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 1020.0
+margin_bottom = 926.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 custom_constants/vseparation = 10
@@ -376,6 +313,6 @@ columns = 3
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="pressed" from="VBoxContainer/BarContainer/HBoxContainer/ReturnMenu" to="." method="_on_ReturnMenu_pressed"]
-[connection signal="pressed" from="VBoxContainer/BarContainer/HBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/Home" to="." method="_on_Home_pressed"]
+[connection signal="pressed" from="MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

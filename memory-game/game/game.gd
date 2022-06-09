@@ -24,6 +24,7 @@ enum GameMode {EASY, MEDIUM, HARD}
 
 
 #  [PUBLIC_VARIABLES]
+var failed_attempt: int = 0
 
 
 #  [PRIVATE_VARIABLES]
@@ -50,10 +51,9 @@ var _timer_counter: int = 0 \
 
 
 #  [ONREADY_VARIABLES]
-onready var grid := $VBoxContainer/GameContainer/MarginContainer/GridContainer
-onready var timer_label := $VBoxContainer/BarContainer/HBoxContainer/HBoxContainer/Time
+onready var grid := $MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer
+onready var timer_label := $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/Time
 onready var timer:= $Timer
-onready var failed_attempt_label := $VBoxContainer/BarContainer/HBoxContainer/HBoxContainer/FailedAttempt
 onready var CardButton := preload("res://game/card/card.tscn")
 
 
@@ -205,7 +205,7 @@ func _reset_counters() -> void:
 	set_timer_counter(0)
 	yield(get_tree().create_timer(1.0), "timeout") # temporary until set theme template
 	timer_label.text = "00:00"
-	failed_attempt_label.text = "Tentativas: 0"
+	failed_attempt = 0
 
 
 #  [SIGNAL_METHODS]
@@ -248,7 +248,7 @@ func _on_start_timer() -> void:
 
 
 func _on_failed_attempt() -> void:
-	failed_attempt_label.text = "Tentativas: " + str(int(failed_attempt_label.text) + 1)
+	failed_attempt += 1
 
 
 func is_full_level() -> void:
@@ -271,13 +271,14 @@ func is_full_level() -> void:
 
 
 func _on_Restart_pressed() -> void:
+	yield(get_tree().create_timer(0.5), "timeout")
 	_reset_counters()
 	if turned_cards.empty():
 		for card in grid.get_children():
 			card.set_current_state(card.State.FRONT)
 			card.disabled = false
 		shuffle_cards()
-		show_cards(1.0)
+		show_cards(0.5)
 
 
 func _on_Timer_timeout() -> void:
@@ -285,8 +286,9 @@ func _on_Timer_timeout() -> void:
 	seconds += 1
 	set_timer_counter(seconds)
 	
+# warning-ignore:integer_division
 	timer_label.text = "%02d:%02d" % [(seconds/60) % 60, seconds % 60]
 
 
-func _on_ReturnMenu_pressed() -> void:
+func _on_Home_pressed() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen

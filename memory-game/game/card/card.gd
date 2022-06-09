@@ -102,7 +102,6 @@ func get_card_name() -> String:
 
 func to_spin() -> void:
 	var temporary_scale_x: float = get_scale().x
-	var state: int = get_current_state()
 	
 	rect_pivot_offset = Vector2(rect_size.x/2, rect_size.x/2)
 	
