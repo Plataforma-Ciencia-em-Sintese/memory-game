@@ -24,6 +24,7 @@
 
 ### ADDED
 - time counter.
+- implemented splash screen.
 
 
 ### CHANGED
