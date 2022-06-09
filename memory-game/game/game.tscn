@@ -3,7 +3,10 @@
 [ext_resource path="res://assets/fonts/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://game/game.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/themes/default/bg_memoria.png" type="Texture" id=4]
+
+[sub_resource type="StreamTexture" id=22]
+flags = 4
+load_path = "res://.import/bg_memoria.png-85e3357c421f90839f47283fca6191f7.stex"
 
 [sub_resource type="DynamicFont" id=1]
 size = 70
@@ -205,7 +208,7 @@ color = Color( 0.666667, 0.482353, 0.764706, 1 )
 self_modulate = Color( 0.635294, 0.454902, 0.733333, 0.0705882 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 4 )
+texture = SubResource( 22 )
 stretch_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

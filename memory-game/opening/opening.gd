@@ -1,6 +1,6 @@
 #tool
 #class_name Name #, res://class_name_icon.svg
-extends Node
+extends Control
 
 
 #  [DOCSTRING]
@@ -25,6 +25,7 @@ extends Node
 
 
 #  [ONREADY_VARIABLES]
+onready var animation := $AnimationPlayer
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -34,11 +35,13 @@ extends Node
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
-	get_tree().change_scene("res://opening/opening.tscn")
+	animation.play("fade")
+	yield(animation, "animation_finished")
+	get_tree().change_scene("res://game/game.tscn")
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
-#func _process(_delta: float)%VOID_RETURN:
+#func _process(_delta: float) -> void:
 #	pass
 
 
