@@ -25,7 +25,6 @@ extends Control
 
 
 #  [ONREADY_VARIABLES]
-onready var animation := $AnimationPlayer
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -34,10 +33,8 @@ onready var animation := $AnimationPlayer
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-func _ready() -> void:
-	animation.play("fade")
-	yield(animation, "animation_finished")
-	get_tree().change_scene("res://resume/resume.tscn")
+#func _ready() -> void:
+#	pass
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -52,3 +49,10 @@ func _ready() -> void:
  
 
 #  [SIGNAL_METHODS]
+func _on_Redirect_pressed() -> void:
+	var url: String = "https://www.canalciencia.ibict.br/ciencia-em-sintese1/ciencias-biologicas/196-por-que-existe-tanta-diversidade-de-aves-nas-florestas-tropicais"
+	OS.shell_open(url)
+
+
+func _on_Skip_pressed() -> void:
+	get_tree().change_scene("res://game/game.tscn")

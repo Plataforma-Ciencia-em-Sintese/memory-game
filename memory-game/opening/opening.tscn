@@ -9,7 +9,7 @@
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("MarginContainer/VBoxContainer:modulate")
+tracks/0/path = NodePath("MarginContainer/AspectRatioContainer/VBoxContainer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -25,7 +25,7 @@ tracks/0/keys = {
 resource_name = "fade"
 length = 3.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("MarginContainer/VBoxContainer:modulate")
+tracks/0/path = NodePath("MarginContainer/AspectRatioContainer/VBoxContainer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -62,12 +62,17 @@ margin_top = 10.0
 margin_right = -420.0
 margin_bottom = -10.0
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
-visible = false
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer"]
 margin_right = 1080.0
 margin_bottom = 1060.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/AspectRatioContainer"]
+visible = false
+margin_left = 10.0
+margin_right = 1070.0
+margin_bottom = 1060.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/AspectRatioContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 172.0
 margin_top = 250.0
@@ -77,14 +82,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/separation = 80
 
-[node name="LogoCanal" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="LogoCanal" type="TextureRect" parent="MarginContainer/AspectRatioContainer/VBoxContainer"]
 margin_right = 736.0
 margin_bottom = 98.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 3 )
 
-[node name="LogoIbict" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="LogoIbict" type="TextureRect" parent="MarginContainer/AspectRatioContainer/VBoxContainer"]
 margin_left = 28.0
 margin_top = 178.0
 margin_right = 708.0
@@ -93,7 +98,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 2 )
 
-[node name="LogoFap" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="LogoFap" type="TextureRect" parent="MarginContainer/AspectRatioContainer/VBoxContainer"]
 margin_left = 209.0
 margin_top = 334.0
 margin_right = 527.0
