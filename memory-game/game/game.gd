@@ -72,6 +72,11 @@ func _ready() -> void:
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
+func _unhandled_key_input(event: InputEventKey) -> void:
+	if event.is_action_pressed("dev_mode"):
+		$DevMode.visible = !$DevMode.visible
+
+
 #func _process(_delta: float) -> void:
 #	pass
 
@@ -292,3 +297,15 @@ func _on_Timer_timeout() -> void:
 
 func _on_Home_pressed() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
+
+
+func _on_DevLevel1_pressed() -> void:
+	set_current_mode(GameMode.EASY)
+
+
+func _on_DevLevel2_pressed() -> void:
+	set_current_mode(GameMode.MEDIUM)
+
+
+func _on_DevLevel3_pressed() -> void:
+	set_current_mode(GameMode.HARD)
