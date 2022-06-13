@@ -1,6 +1,5 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://assets/fonts/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://game/game.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=4]
@@ -15,7 +14,7 @@ use_filter = true
 extra_spacing_top = -5
 extra_spacing_bottom = -5
 extra_spacing_char = 10
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
@@ -83,7 +82,7 @@ use_filter = true
 extra_spacing_top = -5
 extra_spacing_bottom = -5
 extra_spacing_char = 10
-font_data = ExtResource( 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=31]
 bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )

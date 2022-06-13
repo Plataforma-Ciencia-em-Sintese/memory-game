@@ -71,7 +71,7 @@ func _ready() -> void:
 	connect("add_cards", self, "_on_add_cards")
 	connect("failed_attempt", self, "_on_failed_attempt")
 	connect("start_timer", self, "_on_start_timer")
-	set_current_mode(GameMode.EASY)
+	set_current_mode(ChangeLevel.request_mode)
 	
 	get_tree().get_root().connect("size_changed", self, "_on_window_size_changed")
 	toggle_fullscreen_button_icon()
@@ -162,7 +162,7 @@ func get_random_image() -> String:
 
 
 func shuffle_cards() -> void:
-	var steps: int = 16
+	var steps: int = 2
 	for _i in range(0, steps):
 		for card in grid.get_children():
 			var temporary_position: Vector2 = Vector2(0.0, 0.0)
@@ -322,7 +322,7 @@ func _on_Timer_timeout() -> void:
 
 
 func _on_Home_pressed() -> void:
-	pass
+	get_tree().change_scene("res://home/home.tscn")
 
 
 func _on_DevLevel1_pressed() -> void:

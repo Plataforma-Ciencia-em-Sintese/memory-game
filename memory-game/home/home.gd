@@ -49,10 +49,18 @@ extends Control
  
 
 #  [SIGNAL_METHODS]
-func _on_Redirect_pressed() -> void:
-	var url: String = "https://www.canalciencia.ibict.br/ciencia-em-sintese1/ciencias-biologicas/196-por-que-existe-tanta-diversidade-de-aves-nas-florestas-tropicais"
-	OS.shell_open(url)
 
 
-func _on_Skip_pressed() -> void:
-	get_tree().change_scene("res://home/home.tscn")
+func _on_Easy_pressed() -> void:
+	ChangeLevel.request_mode = ChangeLevel.GameMode.EASY
+	get_tree().change_scene("res://game/game.tscn")
+
+
+func _on_Medium_pressed() -> void:
+	ChangeLevel.request_mode = ChangeLevel.GameMode.MEDIUM
+	get_tree().change_scene("res://game/game.tscn")
+
+
+func _on_Hard_pressed() -> void:
+	ChangeLevel.request_mode = ChangeLevel.GameMode.HARD
+	get_tree().change_scene("res://game/game.tscn")
