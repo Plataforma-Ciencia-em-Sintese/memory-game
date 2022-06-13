@@ -20,11 +20,8 @@ font_data = ExtResource( 1 )
 
 [node name="CardButton" type="TextureButton"]
 material = SubResource( 5 )
-anchor_right = 0.119792
-anchor_bottom = 0.212963
-margin_bottom = -1.52588e-05
-size_flags_horizontal = 3
-size_flags_vertical = 3
+anchor_right = 0.5625
+anchor_bottom = 1.0
 texture_normal = ExtResource( 3 )
 expand = true
 script = ExtResource( 4 )

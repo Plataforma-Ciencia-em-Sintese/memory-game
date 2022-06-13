@@ -39,6 +39,8 @@ onready var _card_images: PoolStringArray = [
 	"res://game/card/local_images/sai_de_perna_amarela.png", 
 	"res://game/card/local_images/surucuá_de_barriga_amarela.png", 
 	"res://game/card/local_images/tucano_de_bico_preto.png",
+	"res://game/card/local_images/card_11.png",
+	"res://game/card/local_images/card_12.png",
 ]
 var _load_card_images: PoolStringArray = []
 var _current_mode: int = GameMode.EASY \
@@ -54,6 +56,8 @@ var _timer_counter: int = 0 \
 onready var grid := $MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer
 onready var timer_label := $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/Time
 onready var timer:= $Timer
+onready var dev_mode = $DevMode
+onready var fullscreen = $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/FullScreen
 onready var CardButton := preload("res://game/card/card.tscn")
 
 
@@ -69,12 +73,14 @@ func _ready() -> void:
 	connect("start_timer", self, "_on_start_timer")
 	set_current_mode(GameMode.EASY)
 	
+	get_tree().get_root().connect("size_changed", self, "_on_window_size_changed")
+	toggle_fullscreen_button_icon()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
 func _unhandled_key_input(event: InputEventKey) -> void:
 	if event.is_action_pressed("dev_mode"):
-		$DevMode.visible = !$DevMode.visible
+		dev_mode.visible = !dev_mode.visible
 
 
 #func _process(_delta: float) -> void:
@@ -179,16 +185,20 @@ func show_cards(time: float) -> void:
 #  [PRIVATE_METHODS]
 func _make_grid(mode: int):
 	var total_cards: int = 0
+	var card_size: Vector2 = Vector2.ZERO
 	match(mode):
 		GameMode.EASY:
-			grid.columns = 3
-			total_cards = 6
-		GameMode.MEDIUM:
 			grid.columns = 4
 			total_cards = 12
-		GameMode.HARD:
+			card_size = Vector2(236, 236)
+		GameMode.MEDIUM:
 			grid.columns = 5
 			total_cards = 20
+			card_size = Vector2(188, 188)
+		GameMode.HARD:
+			grid.columns = 6
+			total_cards = 24
+			card_size = Vector2(154, 154)
 	
 # warning-ignore:integer_division
 	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
@@ -197,6 +207,7 @@ func _make_grid(mode: int):
 		for _j in range(0, 2):
 			var card := CardButton.instance()
 			grid.add_child(card)
+			card.rect_min_size = card_size
 			card.set_card_image(texture)
 			card.set_card_name(texture_path)
 			card.connect("card_turned", self, "_on_card_turned")
@@ -213,7 +224,22 @@ func _reset_counters() -> void:
 	failed_attempt = 0
 
 
+func toggle_fullscreen_button_icon() -> void:
+	var fullscreen_on: String = ""
+	var fullscreen_off: String = ""
+	match(OS.window_fullscreen):
+		true:
+			fullscreen.text = fullscreen_off
+		false:
+			fullscreen.text = fullscreen_on
+
+
 #  [SIGNAL_METHODS]
+func _on_window_size_changed() -> void:
+	dev_mode.visible = false
+	toggle_fullscreen_button_icon()
+
+
 func _on_add_cards() -> void:
 	shuffle_cards()
 
@@ -296,16 +322,31 @@ func _on_Timer_timeout() -> void:
 
 
 func _on_Home_pressed() -> void:
-	OS.window_fullscreen = !OS.window_fullscreen
+	pass
 
 
 func _on_DevLevel1_pressed() -> void:
-	set_current_mode(GameMode.EASY)
+	yield(get_tree().create_timer(0.5), "timeout")
+	if turned_cards.empty():
+		_reset_counters()
+		set_current_mode(GameMode.EASY)
 
 
 func _on_DevLevel2_pressed() -> void:
-	set_current_mode(GameMode.MEDIUM)
+	yield(get_tree().create_timer(0.5), "timeout")
+	if turned_cards.empty():
+		_reset_counters()
+		set_current_mode(GameMode.MEDIUM)
 
 
 func _on_DevLevel3_pressed() -> void:
-	set_current_mode(GameMode.HARD)
+	yield(get_tree().create_timer(0.5), "timeout")
+	if turned_cards.empty():
+		_reset_counters()
+		set_current_mode(GameMode.HARD)
+
+
+func _on_FullScreen_pressed() -> void:
+	OS.window_fullscreen = !OS.window_fullscreen
+	toggle_fullscreen_button_icon()
+	
