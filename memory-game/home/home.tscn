@@ -459,6 +459,7 @@ margin_top = 879.0
 margin_right = 580.0
 margin_bottom = 979.0
 rect_min_size = Vector2( 100, 100 )
+hint_tooltip = "Como Jogar"
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
