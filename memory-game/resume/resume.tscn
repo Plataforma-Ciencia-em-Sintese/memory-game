@@ -413,4 +413,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="MarginContainer/AspectRatioContainer/VBoxContainer/HBoxContainer2/MarginContainer/Panel/MarginContainer/VBoxContainer/Redirect" to="." method="_on_Redirect_pressed"]
+[connection signal="pressed" from="MarginContainer/AspectRatioContainer/VBoxContainer/HBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="MarginContainer/AspectRatioContainer/VBoxContainer/HBoxContainer/Skip" to="." method="_on_Skip_pressed"]

@@ -49,14 +49,7 @@ extends Control
  
 
 #  [SIGNAL_METHODS]
-func _on_Redirect_pressed() -> void:
-	var url: String = "https://www.canalciencia.ibict.br/ciencia-em-sintese1/ciencias-biologicas/196-por-que-existe-tanta-diversidade-de-aves-nas-florestas-tropicais"
-	OS.shell_open(url)
 
 
-func _on_Skip_pressed() -> void:
-	get_tree().change_scene("res://home/home.tscn")
-
-
-func _on_Credits_pressed() -> void:
-	get_tree().change_scene("res://credits/credits.tscn")
+func _on_Button_pressed() -> void:
+	get_tree().change_scene("res://resume/resume.tscn")
