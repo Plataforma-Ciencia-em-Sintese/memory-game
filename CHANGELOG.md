@@ -25,6 +25,11 @@
 ### ADDED
 - time counter.
 - implemented splash screen.
+- implemented article summary screen.
+- implemented credits screen.
+- implemented home screen.
+- tooltips for general interface icon buttons.
+- devmode on game screen (key 0).
 
 
 ### CHANGED
@@ -36,6 +41,7 @@
 ### REMOVED
 
 ### FIXED
+- grids per card level.
 - card caption display.
 - user interface elements and duration of animations.
 
