@@ -10,6 +10,7 @@ extends Control
 signal add_cards
 signal failed_attempt
 signal start_timer
+signal show_panel_information
 
 
 #  [ENUMS]
@@ -53,12 +54,16 @@ var _timer_counter: int = 0 \
 
 
 #  [ONREADY_VARIABLES]
+onready var CardButton := preload("res://game/card/card.tscn")
 onready var grid := $MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer
 onready var timer_label := $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/Time
 onready var timer:= $Timer
 onready var dev_mode = $DevMode
 onready var fullscreen = $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/FullScreen
-onready var CardButton := preload("res://game/card/card.tscn")
+onready var panel_information = $PanelInformation
+onready var total_stars = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/CongratulationsContainer/TotalStars
+onready var total_time = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/TimeContainer/TotalTime
+onready var total_attempts = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/AttemptsContainer/TotalAttempts
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -71,10 +76,11 @@ func _ready() -> void:
 	connect("add_cards", self, "_on_add_cards")
 	connect("failed_attempt", self, "_on_failed_attempt")
 	connect("start_timer", self, "_on_start_timer")
+	connect("show_panel_information", self, "_on_show_PanelInformation")
 	set_current_mode(ChangeLevel.request_mode)
 	
 	get_tree().get_root().connect("size_changed", self, "_on_window_size_changed")
-	toggle_fullscreen_button_icon()
+	_toggle_fullscreen_button_icon()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -224,7 +230,7 @@ func _reset_counters() -> void:
 	failed_attempt = 0
 
 
-func toggle_fullscreen_button_icon() -> void:
+func _toggle_fullscreen_button_icon() -> void:
 	var fullscreen_on: String = ""
 	var fullscreen_off: String = ""
 	match(OS.window_fullscreen):
@@ -234,10 +240,16 @@ func toggle_fullscreen_button_icon() -> void:
 			fullscreen.text = fullscreen_on
 
 
+func _update_panel_information() -> void:
+	total_stars.bbcode_text = "Você completou o nível!\nConseguiu [color=#aa7bc3][b]0[/b][/color] estrelas."
+	total_time.text = timer_label.text
+	total_attempts.text = str(failed_attempt)
+
+
 #  [SIGNAL_METHODS]
 func _on_window_size_changed() -> void:
 	dev_mode.visible = false
-	toggle_fullscreen_button_icon()
+	_toggle_fullscreen_button_icon()
 
 
 func _on_add_cards() -> void:
@@ -290,15 +302,8 @@ func is_full_level() -> void:
 				remaining_pairs_counter += 1
 	
 	if remaining_pairs_counter == 0:
-		_reset_counters()
 		yield(get_tree().create_timer(1.0), "timeout")
-		match(get_current_mode()):
-			GameMode.EASY:
-				set_current_mode(GameMode.MEDIUM)
-			GameMode.MEDIUM:
-				set_current_mode(GameMode.HARD)
-			GameMode.HARD:
-				set_current_mode(GameMode.EASY)
+		emit_signal("show_panel_information")
 
 
 func _on_Restart_pressed() -> void:
@@ -317,6 +322,8 @@ func _on_Timer_timeout() -> void:
 	seconds += 1
 	set_timer_counter(seconds)
 	
+# warning-ignore:integer_division
+# warning-ignore:integer_division
 # warning-ignore:integer_division
 	timer_label.text = "%02d:%02d" % [(seconds/60) % 60, seconds % 60]
 
@@ -348,5 +355,36 @@ func _on_DevLevel3_pressed() -> void:
 
 func _on_FullScreen_pressed() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
-	toggle_fullscreen_button_icon()
+	_toggle_fullscreen_button_icon()
+
+
+func _on_show_PanelInformation() -> void:
+	timer.stop()
+	_update_panel_information()
+	panel_information.visible = true
+
+
+func _on_PanelInformation_Restart_pressed() -> void:
+	panel_information.visible = false
+	yield(get_tree().create_timer(0.5), "timeout")
+	_reset_counters()
+	if turned_cards.empty():
+		for card in grid.get_children():
+			card.set_current_state(card.State.FRONT)
+			card.disabled = false
+		shuffle_cards()
+		show_cards(0.5)
+
+
+func _on_PanelInformation_Skip_pressed() -> void:
+	_reset_counters()
 	
+	match(get_current_mode()):
+		GameMode.EASY:
+			set_current_mode(GameMode.MEDIUM)
+		GameMode.MEDIUM:
+			set_current_mode(GameMode.HARD)
+		GameMode.HARD:
+			set_current_mode(GameMode.EASY)
+	
+	panel_information.visible = false
