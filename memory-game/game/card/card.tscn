@@ -9,7 +9,7 @@
 shader = ExtResource( 2 )
 shader_param/radius = 1.0
 shader_param/animate = false
-shader_param/square_scale = 0.1
+shader_param/square_scale = 0.05
 
 [sub_resource type="DynamicFont" id=6]
 size = 24
@@ -22,6 +22,7 @@ font_data = ExtResource( 1 )
 material = SubResource( 5 )
 anchor_right = 0.5625
 anchor_bottom = 1.0
+rect_min_size = Vector2( 144, 160 )
 texture_normal = ExtResource( 3 )
 expand = true
 script = ExtResource( 4 )

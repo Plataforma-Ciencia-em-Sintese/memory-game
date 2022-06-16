@@ -196,15 +196,15 @@ func _make_grid(mode: int):
 		GameMode.EASY:
 			grid.columns = 4
 			total_cards = 12
-			card_size = Vector2(236, 236)
+			card_size = Vector2(228, 242)
 		GameMode.MEDIUM:
 			grid.columns = 5
 			total_cards = 20
-			card_size = Vector2(188, 188)
+			card_size = Vector2(178, 192)
 		GameMode.HARD:
 			grid.columns = 6
 			total_cards = 24
-			card_size = Vector2(154, 154)
+			card_size = Vector2(144, 160)
 	
 # warning-ignore:integer_division
 	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
