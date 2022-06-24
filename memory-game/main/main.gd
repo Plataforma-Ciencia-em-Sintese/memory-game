@@ -34,7 +34,7 @@ extends Node
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
-	get_tree().change_scene("res://opening/opening.tscn")
+	Api.connect("api_request_completed", self, "_on_Api_api_request_completed")
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -49,3 +49,8 @@ func _ready() -> void:
  
 
 #  [SIGNAL_METHODS]
+func _on_Api_api_request_completed() -> void:
+	if Api.get_skip_article():
+		get_tree().change_scene("res://game/game.tscn")
+	else:
+		get_tree().change_scene("res://opening/opening.tscn")

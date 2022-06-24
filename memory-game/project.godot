@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ChangeLevel="*res://home/change_level.gd"
+Api="*res://api/api.gd"
 
 [debug]
 
@@ -43,6 +44,10 @@ dev_mode={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777350,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[network]
+
+ssl/certificates="res://api/ibict.crt"
 
 [physics]
 
