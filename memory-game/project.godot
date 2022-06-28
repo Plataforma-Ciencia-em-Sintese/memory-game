@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Reference",
+"class": "URLParameters",
+"language": "GDScript",
+"path": "res://api/url_parameters.gd"
+} ]
+_global_script_class_icons={
+"URLParameters": ""
+}
+
 [application]
 
 config/name="Memory Game"
