@@ -10,12 +10,12 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
-"class": "URLParameters",
+"class": "URLImageTexture",
 "language": "GDScript",
-"path": "res://api/url_parameters.gd"
+"path": "res://api/url_image_texture.gd"
 } ]
 _global_script_class_icons={
-"URLParameters": ""
+"URLImageTexture": ""
 }
 
 [application]
@@ -28,6 +28,7 @@ config/icon="res://icon.png"
 
 ChangeLevel="*res://home/change_level.gd"
 Api="*res://api/api.gd"
+GameResources="*res://api/game_resources.gd"
 
 [debug]
 

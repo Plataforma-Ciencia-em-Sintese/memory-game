@@ -9,7 +9,7 @@ extends Node
 
 #  [SIGNALS]
 signal read_url_parameters_completed
-signal all_requests_completed
+signal main_request_completed
 
 
 #  [ENUMS]
@@ -39,6 +39,7 @@ var _resource: Dictionary = {} \
 
 #  [ONREADY_VARIABLES]
 onready var http_request: HTTPRequest = HTTPRequest.new()
+
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -87,22 +88,36 @@ func get_resource() -> Dictionary:
 
 #  [PRIVATE_METHODS]
 func _read_url_parameters() -> void:
-	var url: URLParameters = URLParameters.new()
-	
+	# Get URL parameters
+	var raw_string: String = ""
+	if str(OS.get_name()) == "HTML5":
+		# The Javascript Class only works for HTML5.
+		raw_string = str(JavaScript.eval("location.search.split('?')[1];"))
+	else:
+		# For testing in environments other than HTML5.
+		var fake_url_parameters: String = "id=23391&trash=000&skip=1"
+		raw_string = fake_url_parameters
+
+	var strings: PoolStringArray = raw_string.split("&")
+
+	var parameters: Dictionary = {}
+	for item in strings:
+		parameters[item.split("=")[0]] = item.split("=")[1]
+
 	# Set ID
-	if url.get_parameters().has("id"):
-		set_game_id(int(url.get_parameters()["id"]))
-	
+	if parameters.has("id"):
+		set_game_id(int(parameters["id"]))
+
 	# Set Skip Article
-	if url.get_parameters().has("skip"):
-		match(int(url.get_parameters()["skip"])):
+	if parameters.has("skip"):
+		match(int(parameters["skip"])):
 			0:
 				set_skip_article(false)
 			1:
 				set_skip_article(true)
 			_:
 				set_skip_article(false)
-	
+
 	emit_signal("read_url_parameters_completed")
 
 
@@ -117,8 +132,8 @@ func _on_HTTPRequest_request_completed(_result: int, response_code: int, _header
 		#print(str(JSON.print(json.result, "\t")))
 		
 		match(typeof(json.result)):
-			TYPE_ARRAY:
-				push_error("JSON return Array type. While a dictionary type was expected")
+#			TYPE_ARRAY:
+#				push_error("JSON return Array type. While a dictionary type was expected")
 			
 			TYPE_DICTIONARY:
 				print("Response Code: ", response_code,", JSON return Dictionary type.\n\n")
@@ -133,11 +148,11 @@ func _on_HTTPRequest_request_completed(_result: int, response_code: int, _header
 					if json.result["o:resource_template"].has("o:id"):
 						if int(json.result["o:resource_template"]["o:id"]) == RESOURCE_MODEL_ID:
 							set_resource(json.result)
-							emit_signal("all_requests_completed")
+							emit_signal("main_request_completed")
 						else:
 							push_error("The resource model ID is valid but does not match as expected.")
 							
 			_:
 				push_error("Unexpected results from JSON response.")
 	else:
-		push_error(str(response_code))
+		push_error(str("response code return error: ", response_code))
