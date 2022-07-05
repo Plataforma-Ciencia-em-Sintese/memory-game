@@ -1,7 +1,7 @@
 [gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/themes/default/personagem_feedback.png" type="Texture" id=1]
-[ext_resource path="res://game/game.gd" type="Script" id=2]
+[ext_resource path="res://game/game_refactor.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=4]
 
@@ -758,7 +758,6 @@ columns = 3
 [node name="Timer" type="Timer" parent="."]
 
 [node name="DevMode" type="Popup" parent="."]
-visible = true
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0

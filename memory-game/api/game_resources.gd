@@ -48,7 +48,7 @@ resume scene
 var _credits: String = "" \
 		setget , get_credits
 
-var _cards: Array = [] \
+var _cards: Array = Array() \
 		setget , get_cards
 
 var _back_card: ImageTexture = ImageTexture.new() \
@@ -63,13 +63,13 @@ var _logo_image: ImageTexture = ImageTexture.new() \
 var _logo_text: ImageTexture = ImageTexture.new() \
 		setget , get_logo_text
 
-var _game_tittle: String = "" \
+var _game_tittle: String = String() \
 		setget , get_game_tittle
 
 var _sponsors_logo: ImageTexture = ImageTexture.new() \
 		setget , get_sponsors_logo
 
-var _article_summary: String = "" \
+var _article_summary: String = String() \
 		setget , get_article_summary
 
 
@@ -132,11 +132,13 @@ func get_article_summary() -> String:
 func _request_cards() -> void:
 	if Api.get_resource().has("game:contains"):
 		
+		_cards.clear()
+		
 		for card in Api.get_resource()["game:contains"]:
 			
-			var title: String = ""
+			var title: String = String()
 			if card.has("thumbnail_title"):
-				title = str(card["thumbnail_title"]).replace("_", " ").capitalize()
+				title = (card["thumbnail_title"]).replace("_", " ").capitalize()
 			
 			var texture: URLImageTexture = URLImageTexture.new()
 			if card.has("thumbnail_url"):
@@ -144,11 +146,11 @@ func _request_cards() -> void:
 				add_child(http_request)
 				texture.request(URLImageTexture.Type.JPG, http_request, card["thumbnail_url"])
 			
-			_cards.append({"title": title, "texture": texture})
+			_cards.append({"subtitle": title, "texture": texture})
 
 
 #  [SIGNAL_METHODS]
 func _on_Api_main_request_completed() -> void:
-	print("init requests for game_resorces . . .")
+	#print("init requests for game_resorces . . . \n\n")
 	_request_cards()
-	print(get_cards())
+	#print(get_cards(), "\n\n get_cards() complete!")

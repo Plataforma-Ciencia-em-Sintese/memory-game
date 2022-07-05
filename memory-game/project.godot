@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "ImageTexture",
 "class": "URLImageTexture",
 "language": "GDScript",
 "path": "res://api/url_image_texture.gd"
