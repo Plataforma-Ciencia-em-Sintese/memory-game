@@ -45,7 +45,7 @@ resume scene
 
 
 #  [PRIVATE_VARIABLES]
-var _credits: String = "" \
+var _credits: String = String() \
 		setget , get_credits
 
 var _cards: Array = Array() \
@@ -149,8 +149,16 @@ func _request_cards() -> void:
 			_cards.append({"subtitle": title, "texture": texture})
 
 
+func _request_article_summary() -> void:
+	if Api.get_resource().has("lom:description"):
+		if Api.get_resource()["lom:description"].has("@value"):
+			print(String(Api.get_resource()["lom:description"]["@value"]))
+
+
 #  [SIGNAL_METHODS]
 func _on_Api_main_request_completed() -> void:
 	#print("init requests for game_resorces . . . \n\n")
 	_request_cards()
 	#print(get_cards(), "\n\n get_cards() complete!")
+	
+	#_request_article_summary()
