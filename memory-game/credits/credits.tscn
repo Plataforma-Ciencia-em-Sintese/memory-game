@@ -242,6 +242,47 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="Label2" type="Label" parent="MarginContainer/AspectRatioContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+visible = false
+margin_top = 944.0
+margin_right = 928.0
+margin_bottom = 1925.0
+rect_min_size = Vector2( 642, 0 )
+size_flags_horizontal = 5
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0.333333, 0.211765, 0.396078, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "credito de conteudo
+credito de conteudo
+
+credito de conteudo
+credito de conteudo
+credito de conteudo
+
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+credito de conteudo
+"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="Label" type="Label" parent="MarginContainer/AspectRatioContainer/VBoxContainer/Panel"]
 anchor_left = 0.330189
 anchor_top = -0.0648936
