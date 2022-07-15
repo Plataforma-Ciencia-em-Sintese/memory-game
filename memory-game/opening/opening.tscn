@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/themes/default/texture_default.png" type="Texture" id=1]
 [ext_resource path="res://assets/themes/default/marcas.png" type="Texture" id=2]
@@ -6,33 +6,6 @@
 [ext_resource path="res://assets/themes/default/fap_branco.png" type="Texture" id=4]
 [ext_resource path="res://opening/opening.gd" type="Script" id=5]
 [ext_resource path="res://assets/themes/default/logos_ibict_governo_ciencia.png" type="Texture" id=6]
-
-[sub_resource type="Animation" id=3]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("MarginContainer/AspectRatioContainer/VBoxContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logos:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=2]
 resource_name = "fade"
@@ -80,6 +53,7 @@ texture = ExtResource( 1 )
 stretch_mode = 2
 
 [node name="Logos" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -87,7 +61,6 @@ texture = ExtResource( 6 )
 stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 420.0
@@ -123,9 +96,9 @@ size_flags_vertical = 4
 texture = ExtResource( 3 )
 
 [node name="LogoIbict" type="TextureRect" parent="MarginContainer/AspectRatioContainer/VBoxContainer"]
-margin_left = 28.0
+margin_left = 148.0
 margin_top = 178.0
-margin_right = 708.0
+margin_right = 588.0
 margin_bottom = 254.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -141,5 +114,4 @@ size_flags_vertical = 4
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 3 )
 anims/fade = SubResource( 2 )
