@@ -267,8 +267,8 @@ func _on_card_turned(card_instance) -> void:
 	if turned_cards.size() == 1:
 		for card in grid.get_children():
 			card.disabled = true
-			if card.get_state() == card.State.BACK:
-				card.lock_card_label.visible = true
+			#if card.get_state() == card.State.BACK:
+				#card.lock_card_label.visible = true
 		yield(get_tree().create_timer(1.0), "timeout")
 		if turned_cards[0].get_subtitle() == card_instance.get_subtitle():
 			card_instance.set_state(card_instance.State.COMPLETED)
@@ -279,9 +279,9 @@ func _on_card_turned(card_instance) -> void:
 			turned_cards[0].turn_animation()
 			yield(turned_cards[0], "turnning_completed")
 			card_instance.disabled = false
-			card_instance.lock_card_label.visible = false
+			#card_instance.lock_card_label.visible = false
 			turned_cards[0].disabled = false
-			turned_cards[0].lock_card_label.visible = false
+			#turned_cards[0].lock_card_label.visible = false
 			
 			turned_cards.clear()
 			emit_signal("failed_attempt")
@@ -289,7 +289,7 @@ func _on_card_turned(card_instance) -> void:
 		for card in grid.get_children():
 			if card.get_state() == card.State.BACK:
 				card.disabled = false
-				card.lock_card_label.visible = false
+				#card.lock_card_label.visible = false
 
 	is_full_level()
 

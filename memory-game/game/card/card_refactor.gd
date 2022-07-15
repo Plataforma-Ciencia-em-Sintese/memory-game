@@ -70,7 +70,6 @@ func set_state(new_state: int) -> void:
 		State.FRONT:
 			_state = new_state
 			_current_image = new_state
-			#lock_card_label.visible = false
 			self_modulate = Color(1.0, 1.0, 1.0, 1.0) 
 		
 		State.BACK:
@@ -84,7 +83,7 @@ func set_state(new_state: int) -> void:
 		
 		State.COMPLETED:
 			_state = new_state
-			lock_card_label.visible = false
+			#lock_card_label.visible = false
 			disabled = true
 			subtitle_label.visible = true
 			self_modulate = Color(0.65, 0.65, 0.65, 1.0) 
