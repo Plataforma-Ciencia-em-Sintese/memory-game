@@ -241,9 +241,64 @@ func _toggle_fullscreen_button_icon() -> void:
 		false:
 			fullscreen.text = fullscreen_on
 
+func _scoring_rules() -> int:
+	var first_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/First")
+	var second_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Second")
+	var third_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Third")
+	
+	var target_attempt: int = 0
+	var margin_attempt: int = 0
+	var target_time: int = 0
+	var margin_time: int = 0
+	var stars: int = 0
+	
+	match(get_current_mode()):
+		GameMode.EASY:
+			target_attempt = 10
+			margin_attempt = 5
+			target_time = 40
+			margin_time = 10
+			
+		GameMode.MEDIUM:
+			target_attempt = 20
+			margin_attempt = 5
+			target_time = 70
+			margin_time = 10
+			
+		GameMode.HARD:
+			target_attempt = 30
+			margin_attempt = 5
+			target_time = 90
+			margin_time = 10
+	
+	# three stars
+	if get_timer_counter() < target_time and failed_attempt < target_attempt:
+		stars = 3
+	
+	# two stars
+	elif get_timer_counter() < (target_time + margin_time) and failed_attempt < (target_attempt + margin_attempt):
+		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		stars = 2
+	
+	# one stars
+	elif (get_timer_counter() < (target_time + margin_time) and failed_attempt > (target_attempt + margin_attempt)) or \
+			(get_timer_counter() > (target_time + margin_time) and failed_attempt < (target_attempt + margin_attempt)):
+		second_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		stars = 1
+	
+	# zero stars
+	elif get_timer_counter() > (target_time + margin_time) and failed_attempt > (target_attempt + margin_attempt):
+		first_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		second_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		stars = 0
+	
+	return stars
+
 
 func _update_panel_information() -> void:
-	total_stars.bbcode_text = "Você completou o nível!\nConseguiu [color=#aa7bc3][b]0[/b][/color] estrelas."
+	total_stars.bbcode_text = str("Você completou o nível!\nConseguiu [color=#aa7bc3][b]", str(_scoring_rules()), "[/b][/color] estrelas.")
 	total_time.text = timer_label.text
 	total_attempts.text = str(failed_attempt)
 
