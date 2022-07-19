@@ -124,14 +124,11 @@ func _read_url_parameters() -> void:
 #  [SIGNAL_METHODS]
 func _on_Api_read_url_parameters_completed() -> void:
 	var url: String = BASE_URL + str(get_game_id())
-	var custom_headers: PoolStringArray = PoolStringArray()
-	var ssl_validate_domain: bool = false
-	var request_data: String = String()
+	var ssl_validate_domain: bool = true if OS.get_name() == "HTML5" else false
 	
-	var error: int = http_request.request(url, custom_headers, ssl_validate_domain, HTTPClient.METHOD_GET, request_data)
+	var error: int = http_request.request(url, PoolStringArray(), ssl_validate_domain)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
-	
 
 
 func _on_HTTPRequest_request_completed(_result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray) -> void:

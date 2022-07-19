@@ -48,11 +48,9 @@ enum Type {JPG, JPEG, PNG, WEBP, BMP, TGA}
 func request(image_type: int, http_request: HTTPRequest, url: String) -> void:
 	http_request.connect("request_completed", self, "_on_HTTPRequest_request_completed", [image_type])
 	
-	var custom_headers: PoolStringArray = PoolStringArray()
-	var ssl_validate_domain: bool = false
-	var request_data: String = String()
+	var ssl_validate_domain: bool = true if OS.get_name() == "HTML5" else false
 	
-	var error: int = http_request.request(url, custom_headers, ssl_validate_domain, HTTPClient.METHOD_GET, request_data)
+	var error: int = http_request.request(url, PoolStringArray(), ssl_validate_domain)
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
