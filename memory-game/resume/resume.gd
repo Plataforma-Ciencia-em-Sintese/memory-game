@@ -25,6 +25,7 @@ extends Control
 
 
 #  [ONREADY_VARIABLES]
+onready var article_summary: Label = $"MarginContainer/AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer2/Panel/MarginContainer/VBoxContainer/Text"
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -33,8 +34,8 @@ extends Control
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-#func _ready() -> void:
-#	pass
+func _ready() -> void:
+	article_summary.text = GameResources.get_article_summary() + "\n\n Bom Divertimento!"
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]

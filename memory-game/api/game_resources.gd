@@ -151,8 +151,8 @@ func _request_cards() -> void:
 
 func _request_article_summary() -> void:
 	if Api.get_resource().has("lom:description"):
-		if Api.get_resource()["lom:description"].has("@value"):
-			print(String(Api.get_resource()["lom:description"]["@value"]))
+		if Api.get_resource()["lom:description"][0].has("@value"):
+			_article_summary = str(Api.get_resource()["lom:description"][0]["@value"])
 
 
 #  [SIGNAL_METHODS]
@@ -161,4 +161,4 @@ func _on_Api_main_request_completed() -> void:
 	_request_cards()
 	#print(get_cards(), "\n\n get_cards() complete!")
 	
-	#_request_article_summary()
+	_request_article_summary()
