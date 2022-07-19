@@ -141,7 +141,7 @@ func _on_HTTPRequest_request_completed(_result: int, response_code: int, _header
 #				push_error("JSON return Array type. While a dictionary type was expected")
 			
 			TYPE_DICTIONARY:
-				print("Response Code: ", response_code,", JSON return Dictionary type.\n\n")
+				#print("Response Code: ", response_code,", JSON return Dictionary type.\n\n")
 				
 				# Checks if the ID parameter passed by URL is valid.
 				if json.result.has("errors"):
