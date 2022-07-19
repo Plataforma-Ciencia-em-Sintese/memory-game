@@ -129,6 +129,11 @@ func get_article_summary() -> String:
 
 
 #  [PRIVATE_METHODS]
+func _request_credits() -> void:
+	pass
+	#return _credits
+
+
 func _request_cards() -> void:
 	if Api.get_resource().has("game:contains"):
 		
@@ -149,16 +154,52 @@ func _request_cards() -> void:
 			_cards.append({"subtitle": title, "texture": texture})
 
 
+func _request_back_card() -> void:
+	pass
+	#return _back_card
+
+
+func _request_character_panel_information() -> void:
+	pass
+	#return _character_panel_information
+
+
+func _request_logo_image() -> void:
+	pass
+	#return _logo_image
+
+
+func _request_logo_text() -> void:
+	pass
+	#_logo_text 
+
+
+func _request_game_tittle() -> void:
+	if Api.get_resource().has("bibo:shortTitle"):
+		if Api.get_resource()["bibo:shortTitle"][0].has("@value"):
+			_game_tittle = str(Api.get_resource()["bibo:shortTitle"][0]["@value"])
+
+
+func _request_sponsors_logo() -> void:
+	pass
+	#return _sponsors_logo
+
+
 func _request_article_summary() -> void:
 	if Api.get_resource().has("lom:description"):
 		if Api.get_resource()["lom:description"][0].has("@value"):
 			_article_summary = str(Api.get_resource()["lom:description"][0]["@value"])
 
 
+
 #  [SIGNAL_METHODS]
 func _on_Api_main_request_completed() -> void:
-	#print("init requests for game_resorces . . . \n\n")
+	#_request_credits()
 	_request_cards()
-	#print(get_cards(), "\n\n get_cards() complete!")
-	
+	#_request_back_card()
+	#_request_character_panel_information()
+	#_request_logo_image()
+	#_request_logo_text()
+	_request_game_tittle()
+	#_request_sponsors_logo()
 	_request_article_summary()

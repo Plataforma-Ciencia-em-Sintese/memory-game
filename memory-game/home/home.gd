@@ -25,6 +25,7 @@ extends Control
 
 
 #  [ONREADY_VARIABLES]
+onready var game_title: Label = $"MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo/Tittle"
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -33,8 +34,8 @@ extends Control
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-#func _ready() -> void:
-#	pass
+func _ready() -> void:
+	game_title.text = GameResources.get_game_tittle().to_upper()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
