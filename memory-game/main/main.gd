@@ -50,7 +50,4 @@ func _ready() -> void:
 
 #  [SIGNAL_METHODS]
 func _on_Api_main_request_completed() -> void:
-	if Api.get_skip_article():
-		get_tree().change_scene("res://home/home.tscn")
-	else:
-		get_tree().change_scene("res://opening/opening.tscn")
+	get_tree().change_scene("res://opening/opening.tscn")

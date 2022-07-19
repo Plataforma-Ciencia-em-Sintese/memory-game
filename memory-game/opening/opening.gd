@@ -37,7 +37,10 @@ onready var animation := $AnimationPlayer
 func _ready() -> void:
 	animation.play("fade")
 	yield(animation, "animation_finished")
-	get_tree().change_scene("res://resume/resume.tscn")
+	if Api.get_skip_article():
+		get_tree().change_scene("res://home/home.tscn")
+	else:
+		get_tree().change_scene("res://resume/resume.tscn")
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
