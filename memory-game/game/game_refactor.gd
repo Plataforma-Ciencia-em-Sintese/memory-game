@@ -52,6 +52,7 @@ onready var panel_information = $PanelInformation
 onready var total_stars = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/CongratulationsContainer/TotalStars
 onready var total_time = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/TimeContainer/TotalTime
 onready var total_attempts = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/AttemptsContainer/TotalAttempts
+onready var background_texture := $BackgroundTexture
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -61,6 +62,8 @@ onready var total_attempts = $PanelInformation/GlobalContainer/MarginContainer/V
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
+	_load_theme()
+	
 	connect("add_cards", self, "_on_add_cards")
 	connect("failed_attempt", self, "_on_failed_attempt")
 	connect("start_timer", self, "_on_start_timer")
@@ -183,6 +186,11 @@ func show_cards(time: float) -> void:
 			card.turn_animation()
 
 #  [PRIVATE_METHODS]
+func _load_theme() -> void:
+	background_texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
+	background_texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
+
+
 func _make_grid(mode: int):
 	var total_cards: int = 0
 	var card_size: Vector2 = Vector2.ZERO

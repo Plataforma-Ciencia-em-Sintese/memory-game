@@ -95,7 +95,7 @@ func _read_url_parameters() -> void:
 		raw_string = str(JavaScript.eval("location.search.split('?')[1];"))
 	else:
 		# For testing in environments other than HTML5.
-		var fake_url_parameters: String = "id=23391&trash=000&skip=1"
+		var fake_url_parameters: String = "id=23391&trash=000&skip=0"
 		raw_string = fake_url_parameters
 
 	var strings: PoolStringArray = raw_string.split("&")

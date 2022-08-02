@@ -26,7 +26,7 @@ extends Control
 
 #  [ONREADY_VARIABLES]
 onready var article_summary: Label = $"MarginContainer/AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer2/Panel/MarginContainer/VBoxContainer/Text"
-
+onready var background_texture := $BackgroundTexture
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -35,6 +35,8 @@ onready var article_summary: Label = $"MarginContainer/AspectRatioContainer/Marg
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
+	_load_theme()
+	
 	article_summary.text = GameResources.get_article_summary() + "\n\n Bom Divertimento!"
 
 
@@ -47,6 +49,9 @@ func _ready() -> void:
 
 
 #  [PRIVATE_METHODS]
+func _load_theme() -> void:
+	background_texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
+	background_texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
  
 
 #  [SIGNAL_METHODS]

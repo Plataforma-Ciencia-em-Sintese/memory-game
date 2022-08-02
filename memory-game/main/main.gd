@@ -35,7 +35,7 @@ extends Node
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
 	Api.connect("main_request_completed", self, "_on_Api_main_request_completed")
-
+	VisualServer.set_default_clear_color(ThemeResources.get_color(ThemeResources.PB))
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
 #func _process(_delta: float)%VOID_RETURN:
