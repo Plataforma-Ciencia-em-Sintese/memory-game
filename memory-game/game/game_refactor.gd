@@ -487,4 +487,5 @@ func _on_Help_pressed() -> void:
 
 
 func _on_HowToPlay_close() -> void:
-	timer.start()
+	if get_timer_counter() > 0:
+		timer.start()
