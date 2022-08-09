@@ -43,6 +43,7 @@ var _timer_counter: int = int() \
 
 #  [ONREADY_VARIABLES]
 onready var CardButton := preload("res://game/card/card_refactor.tscn")
+onready var HowToPlay := preload("res://how_to_play/how_to_play.tscn")
 onready var grid := $"MarginContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer"
 onready var timer_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Time"
 onready var level_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Level"
@@ -476,3 +477,14 @@ func _on_ShowPanelInformation_pressed() -> void:
 			child.disabled = false
 	show_panel_information.visible = false
 	panel_information.visible = true
+
+
+func _on_Help_pressed() -> void:
+	timer.stop()
+	var how_to_play := HowToPlay.instance()
+	add_child(how_to_play)
+	how_to_play.connect("close", self, "_on_HowToPlay_close")
+
+
+func _on_HowToPlay_close() -> void:
+	timer.start()
