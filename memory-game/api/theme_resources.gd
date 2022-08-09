@@ -7,6 +7,7 @@ extends Node
 
 
 #  [SIGNALS]
+signal theme_color_request_completed
 
 
 #  [ENUMS]
@@ -23,6 +24,9 @@ enum {SL3, SL2, SL1, SB,  SD1, SD2, SD3}
 
 
 #  [PUBLIC_VARIABLES]
+var test_mode: bool = true
+var test_primary: String = "#9A63B8"
+var test_secondary: String = "#B8D54D"
 
 
 #  [PRIVATE_VARIABLES]
@@ -45,8 +49,10 @@ func _init() -> void:
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-#func _ready() -> void:
-#	pass
+func _ready() -> void:
+	if test_mode:
+		set_primary_color(test_primary)
+		set_secondary_color(test_secondary)
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -64,7 +70,10 @@ func get_resource() -> Dictionary:
 
 
 func set_primary_color(new_value: Color) -> void:
-	_primary_color = new_value
+	if test_mode:
+		_primary_color = Color(test_primary)
+	else:
+		_primary_color = new_value
 
 
 func get_primary_color() -> Color:
@@ -72,7 +81,10 @@ func get_primary_color() -> Color:
 
 
 func set_secondary_color(new_value: Color) -> void:
-	_secondary_color = new_value
+	if test_mode:
+		_secondary_color = Color(test_secondary)
+	else:
+		_secondary_color = new_value
 
 
 func get_secondary_color() -> Color:
@@ -81,7 +93,7 @@ func get_secondary_color() -> Color:
 
 func get_color(name: int) -> Color:
 	var color: Color = Color()
-	var intensity: float = 25.0
+	var intensity: float = 0.25
 	
 	match(name):
 		# PRIMARY COLORS
@@ -102,19 +114,19 @@ func get_color(name: int) -> Color:
 
 		# SECONDARY COLORS
 		SL3: 
-			color = get_secondary_color().darkened(intensity * 3.0)
+			color = get_secondary_color().lightened(intensity * 3.0)
 		SL2: 
-			color = get_secondary_color().darkened(intensity * 2.0)
+			color = get_secondary_color().lightened(intensity * 2.0)
 		SL1: 
-			color = get_secondary_color().darkened(intensity)
+			color = get_secondary_color().lightened(intensity)
 		SB:  
 			color = get_secondary_color()
 		SD1:
-			color = get_secondary_color().lightened(intensity)
+			color = get_secondary_color().darkened(intensity)
 		SD2: 
-			color = get_secondary_color().lightened(intensity * 2.0)
+			color = get_secondary_color().darkened(intensity * 2.0)
 		SD3:
-			color = get_secondary_color().lightened(intensity * 3.0)
+			color = get_secondary_color().darkened(intensity * 3.0)
 
 	return color
 
@@ -163,6 +175,8 @@ func _on_HTTPRequest_request_completed(_result: int, response_code: int, _header
 						set_primary_color(Color(str(json.result["bibframe:colorContent"][0]["@value"])))
 					if json.result["bibframe:colorContent"][1].has("@value"):
 						set_secondary_color(Color(str(json.result["bibframe:colorContent"][1]["@value"])))
+					
+					emit_signal("theme_color_request_completed")
 			_:
 				push_error("Unexpected results from JSON response.")
 	else:

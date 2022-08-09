@@ -50,8 +50,9 @@ func _ready() -> void:
 
 #  [PRIVATE_METHODS]
 func _load_theme() -> void:
-	background_texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
-	background_texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
+	pass
+#	background_texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
+#	background_texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
  
 
 #  [SIGNAL_METHODS]
@@ -70,3 +71,7 @@ func _on_Medium_pressed() -> void:
 func _on_Hard_pressed() -> void:
 	ChangeLevel.request_mode = ChangeLevel.GameMode.HARD
 	get_tree().change_scene("res://game/game.tscn")
+
+
+func _on_Credits_pressed() -> void:
+	get_tree().change_scene("res://credits/credits.tscn")

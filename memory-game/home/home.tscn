@@ -1,6 +1,6 @@
 [gd_scene load_steps=39 format=2]
 
-[ext_resource path="res://assets/themes/default/texture_default.png" type="Texture" id=1]
+[ext_resource path="res://assets/components/background_texture/background_texture.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/themes/default/logo_home.png" type="Texture" id=4]
@@ -14,11 +14,11 @@ corner_radius_top_right = 200
 corner_radius_bottom_right = 200
 corner_radius_bottom_left = 200
 corner_detail = 20
-shadow_color = Color( 1, 1, 1, 0.6 )
-shadow_size = 40
+shadow_color = Color( 1, 1, 1, 0.588235 )
+shadow_size = 36
 
 [sub_resource type="DynamicFont" id=44]
-size = 80
+size = 90
 outline_size = 4
 outline_color = Color( 0.333333, 0.211765, 0.396078, 1 )
 use_filter = true
@@ -51,7 +51,8 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="DynamicFont" id=3]
-size = 29
+size = 32
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=4]
@@ -121,7 +122,8 @@ extra_spacing_bottom = -32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=31]
-size = 29
+size = 32
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=32]
@@ -185,7 +187,8 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="DynamicFont" id=37]
-size = 29
+size = 32
+use_filter = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=38]
@@ -249,7 +252,7 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="DynamicFont" id=28]
-size = 28
+size = 20
 use_filter = true
 font_data = ExtResource( 3 )
 
@@ -266,70 +269,69 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 expand_margin_left = 40.0
 expand_margin_right = 40.0
+expand_margin_top = 12.0
+expand_margin_bottom = 11.0
 
-[sub_resource type="DynamicFont" id=21]
-size = 42
+[sub_resource type="DynamicFont" id=45]
+size = 32
 use_filter = true
-extra_spacing_top = -5
-extra_spacing_bottom = -5
-extra_spacing_char = 10
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.803922, 0.839216, 0.670588, 1 )
+[sub_resource type="StyleBoxFlat" id=46]
+bg_color = Color( 0.67451, 0.517647, 0.760784, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 6
-border_color = Color( 0.396078, 0.458824, 0.164706, 1 )
+border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=23]
+[sub_resource type="StyleBoxFlat" id=47]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 6
-border_color = Color( 0.396078, 0.458824, 0.164706, 1 )
+border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=24]
-bg_color = Color( 0.721569, 0.835294, 0.301961, 1 )
+[sub_resource type="StyleBoxFlat" id=48]
+bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 6
-border_color = Color( 0.396078, 0.458824, 0.164706, 1 )
+border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=25]
-bg_color = Color( 0.721569, 0.835294, 0.301961, 1 )
+[sub_resource type="StyleBoxFlat" id=49]
+bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 6
-border_color = Color( 0.396078, 0.458824, 0.164706, 1 )
+border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=26]
-bg_color = Color( 0.721569, 0.835294, 0.301961, 1 )
+[sub_resource type="StyleBoxFlat" id=50]
+bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 6
-border_color = Color( 0.396078, 0.458824, 0.164706, 1 )
+border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -340,17 +342,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
 
-[node name="BackgroundColor" type="ColorRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.666667, 0.482353, 0.764706, 1 )
-
-[node name="BackgroundTexture" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 1 )
-stretch_mode = 2
+[node name="BackgroundTexture" parent="." instance=ExtResource( 1 )]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -378,13 +370,15 @@ margin_bottom = 1004.0
 
 [node name="Logo" type="VBoxContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer"]
 margin_right = 1060.0
-margin_bottom = 549.0
+margin_bottom = 562.0
 custom_constants/separation = 27
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo"]
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 1060.0
 margin_bottom = 306.0
+rect_min_size = Vector2( 399, 292 )
+size_flags_horizontal = 5
 
 [node name="Circle" type="PanelContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo/PanelContainer2"]
 margin_left = 384.0
@@ -410,7 +404,9 @@ stretch_mode = 6
 [node name="GameName" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo"]
 margin_top = 333.0
 margin_right = 1060.0
-margin_bottom = 437.0
+margin_bottom = 450.0
+rect_min_size = Vector2( 676, 0 )
+size_flags_horizontal = 3
 custom_fonts/font = SubResource( 44 )
 text = "JOGO DA MEMÓRIA"
 align = 1
@@ -418,9 +414,9 @@ valign = 1
 
 [node name="Tittle" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo"]
 margin_left = 431.0
-margin_top = 464.0
+margin_top = 477.0
 margin_right = 628.0
-margin_bottom = 549.0
+margin_bottom = 562.0
 rect_min_size = Vector2( 160, 85 )
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -436,18 +432,18 @@ __meta__ = {
 }
 
 [node name="Options" type="VBoxContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer"]
-margin_top = 553.0
+margin_top = 566.0
 margin_right = 1060.0
 margin_bottom = 954.0
 size_flags_vertical = 3
 custom_constants/separation = 30
 
 [node name="Panel" type="Panel" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options"]
-margin_left = 220.0
-margin_top = 83.0
-margin_right = 840.0
-margin_bottom = 275.0
-rect_min_size = Vector2( 620, 192 )
+margin_left = 273.0
+margin_top = 95.0
+margin_right = 786.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 513, 175 )
 size_flags_horizontal = 4
 size_flags_vertical = 10
 custom_styles/panel = SubResource( 27 )
@@ -455,20 +451,22 @@ custom_styles/panel = SubResource( 27 )
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -10.0
+margin_bottom = -17.0
 custom_constants/margin_right = 60
 custom_constants/margin_left = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer"]
 margin_left = 60.0
-margin_right = 560.0
-margin_bottom = 192.0
+margin_right = 460.0
+margin_bottom = 158.0
 custom_constants/separation = 20
 
 [node name="Easy" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer"]
-margin_top = 56.0
-margin_right = 153.0
-margin_bottom = 136.0
-rect_min_size = Vector2( 150, 80 )
+margin_top = 35.0
+margin_right = 120.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 120, 88 )
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -498,19 +496,19 @@ __meta__ = {
 }
 
 [node name="First" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy/Stars"]
-margin_left = 24.0
-margin_top = 39.0
-margin_right = 51.0
-margin_bottom = 39.0
+margin_left = 7.0
+margin_top = 43.0
+margin_right = 34.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
 
 [node name="Second" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy/Stars"]
-margin_left = 63.0
-margin_top = 39.0
-margin_right = 90.0
-margin_bottom = 39.0
+margin_left = 46.0
+margin_top = 43.0
+margin_right = 73.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
@@ -519,10 +517,10 @@ __meta__ = {
 }
 
 [node name="Third" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy/Stars"]
-margin_left = 102.0
-margin_top = 39.0
-margin_right = 129.0
-margin_bottom = 39.0
+margin_left = 85.0
+margin_top = 43.0
+margin_right = 112.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
@@ -531,11 +529,11 @@ __meta__ = {
 }
 
 [node name="Medium" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer"]
-margin_left = 173.0
-margin_top = 56.0
-margin_right = 326.0
-margin_bottom = 136.0
-rect_min_size = Vector2( 150, 80 )
+margin_left = 140.0
+margin_top = 35.0
+margin_right = 260.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 120, 88 )
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -565,19 +563,19 @@ __meta__ = {
 }
 
 [node name="First" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium/Stars"]
-margin_left = 24.0
-margin_top = 39.0
-margin_right = 51.0
-margin_bottom = 39.0
+margin_left = 7.0
+margin_top = 43.0
+margin_right = 34.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
 
 [node name="Second" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium/Stars"]
-margin_left = 63.0
-margin_top = 39.0
-margin_right = 90.0
-margin_bottom = 39.0
+margin_left = 46.0
+margin_top = 43.0
+margin_right = 73.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
@@ -586,10 +584,10 @@ __meta__ = {
 }
 
 [node name="Third" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium/Stars"]
-margin_left = 102.0
-margin_top = 39.0
-margin_right = 129.0
-margin_bottom = 39.0
+margin_left = 85.0
+margin_top = 43.0
+margin_right = 112.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
@@ -598,11 +596,11 @@ __meta__ = {
 }
 
 [node name="Hard" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer"]
-margin_left = 346.0
-margin_top = 56.0
-margin_right = 500.0
-margin_bottom = 136.0
-rect_min_size = Vector2( 150, 80 )
+margin_left = 280.0
+margin_top = 35.0
+margin_right = 400.0
+margin_bottom = 123.0
+rect_min_size = Vector2( 120, 88 )
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -632,19 +630,19 @@ __meta__ = {
 }
 
 [node name="First" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard/Stars"]
-margin_left = 24.0
-margin_top = 39.0
-margin_right = 51.0
-margin_bottom = 39.0
+margin_left = 7.0
+margin_top = 43.0
+margin_right = 34.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
 
 [node name="Second" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard/Stars"]
-margin_left = 63.0
-margin_top = 39.0
-margin_right = 90.0
-margin_bottom = 39.0
+margin_left = 46.0
+margin_top = 43.0
+margin_right = 73.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
@@ -653,10 +651,10 @@ __meta__ = {
 }
 
 [node name="Third" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard/Stars"]
-margin_left = 102.0
-margin_top = 39.0
-margin_right = 129.0
-margin_bottom = 39.0
+margin_left = 85.0
+margin_top = 43.0
+margin_right = 112.0
+margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
@@ -665,14 +663,13 @@ __meta__ = {
 }
 
 [node name="Tittle" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel"]
-anchor_left = 0.314516
-anchor_top = -0.171875
-anchor_right = 0.685484
-anchor_bottom = 0.182292
-rect_min_size = Vector2( 180, 68 )
-rect_pivot_offset = Vector2( 180, 60 )
-size_flags_horizontal = 6
-size_flags_vertical = 1
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -82.5
+margin_top = -21.0
+margin_right = 82.5
+margin_bottom = 12.0
+rect_pivot_offset = Vector2( 121, 23 )
 custom_colors/font_color = Color( 0.333333, 0.211765, 0.396078, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 28 )
@@ -681,32 +678,29 @@ text = "Selecione o nível"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": true,
 "_editor_description_": ""
 }
 
-[node name="Button" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options"]
-margin_left = 482.0
-margin_top = 305.0
-margin_right = 578.0
-margin_bottom = 401.0
-rect_min_size = Vector2( 96, 96 )
-hint_tooltip = "Como Jogar"
+[node name="Credits" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options"]
+margin_left = 435.0
+margin_top = 300.0
+margin_right = 624.0
+margin_bottom = 388.0
+rect_min_size = Vector2( 189, 88 )
 focus_mode = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 0.721569, 0.835294, 0.301961, 1 )
-custom_fonts/font = SubResource( 21 )
-custom_styles/hover = SubResource( 22 )
-custom_styles/pressed = SubResource( 23 )
-custom_styles/focus = SubResource( 24 )
-custom_styles/disabled = SubResource( 25 )
-custom_styles/normal = SubResource( 26 )
+custom_colors/font_color_pressed = Color( 0.603922, 0.388235, 0.721569, 1 )
+custom_fonts/font = SubResource( 45 )
+custom_styles/hover = SubResource( 46 )
+custom_styles/pressed = SubResource( 47 )
+custom_styles/focus = SubResource( 48 )
+custom_styles/disabled = SubResource( 49 )
+custom_styles/normal = SubResource( 50 )
 enabled_focus_mode = 0
-text = ""
+text = "Créditos"
 __meta__ = {
 "_editor_description_": ""
 }
@@ -714,3 +708,4 @@ __meta__ = {
 [connection signal="pressed" from="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy" to="." method="_on_Easy_pressed"]
 [connection signal="pressed" from="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium" to="." method="_on_Medium_pressed"]
 [connection signal="pressed" from="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard" to="." method="_on_Hard_pressed"]
+[connection signal="pressed" from="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Credits" to="." method="_on_Credits_pressed"]

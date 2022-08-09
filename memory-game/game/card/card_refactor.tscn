@@ -1,16 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://game/card/rounded_edges.shader" type="Shader" id=1]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://game/card/local_images/alma_de_gato.png" type="Texture" id=3]
 [ext_resource path="res://game/card/card_refactor.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=5]
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 1 )
-shader_param/radius = 1.0
-shader_param/animate = false
-shader_param/square_scale = 0.05
 
 [sub_resource type="DynamicFont" id=6]
 size = 24
@@ -63,7 +56,6 @@ tracks/1/keys = {
 }
 
 [node name="CardButton" type="TextureButton"]
-material = SubResource( 5 )
 anchor_right = 0.5625
 anchor_bottom = 1.0
 rect_min_size = Vector2( 144, 160 )

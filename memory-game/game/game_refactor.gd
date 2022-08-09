@@ -43,16 +43,18 @@ var _timer_counter: int = int() \
 
 #  [ONREADY_VARIABLES]
 onready var CardButton := preload("res://game/card/card_refactor.tscn")
-onready var grid := $MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer
-onready var timer_label := $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/Time
+onready var grid := $"MarginContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer"
+onready var timer_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Time"
+onready var level_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Level"
 onready var timer:= $Timer
+onready var bar_container := $"MarginContainer/VBoxContainer/BarContainer"
 onready var dev_mode = $DevMode
-onready var fullscreen = $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/FullScreen
+onready var fullscreen = $"MarginContainer/VBoxContainer/BarContainer/FullScreen"
 onready var panel_information = $PanelInformation
 onready var total_stars = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/CongratulationsContainer/TotalStars
 onready var total_time = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/TimeContainer/TotalTime
 onready var total_attempts = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/AttemptsContainer/TotalAttempts
-onready var background_texture := $BackgroundTexture
+onready var show_panel_information := $ShowPanelInformation
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -104,16 +106,19 @@ func set_current_mode(mode: int) -> void:
 	
 	match(mode):
 		GameMode.EASY:
+			level_label.text = "Fácil"
 			set_cards(GameResources.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 
 		GameMode.MEDIUM:
+			level_label.text = "Médio"
 			set_cards(GameResources.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 			
 		GameMode.HARD:
+			level_label.text = "Difícil"
 			set_cards(GameResources.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
@@ -187,8 +192,7 @@ func show_cards(time: float) -> void:
 
 #  [PRIVATE_METHODS]
 func _load_theme() -> void:
-	background_texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
-	background_texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
+	pass
 
 
 func _make_grid(mode: int):
@@ -199,15 +203,15 @@ func _make_grid(mode: int):
 		GameMode.EASY:
 			grid.columns = 4
 			total_cards = 12
-			card_size = Vector2(228, 242)
+			card_size = Vector2(256, 256)
 		GameMode.MEDIUM:
 			grid.columns = 5
 			total_cards = 20
-			card_size = Vector2(178, 192)
+			card_size = Vector2(200, 200)
 		GameMode.HARD:
 			grid.columns = 6
 			total_cards = 24
-			card_size = Vector2(144, 160)
+			card_size = Vector2(180, 180)
 	
 # warning-ignore:integer_division
 	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
@@ -455,3 +459,20 @@ func _on_PanelInformation_Skip_pressed() -> void:
 			set_current_mode(GameMode.EASY)
 	
 	panel_information.visible = false
+
+
+func _on_Hide_pressed() -> void:
+	for child in bar_container.get_children():
+		if child is Button:
+			child.disabled = true
+			
+	panel_information.visible = false
+	show_panel_information.visible = true
+
+
+func _on_ShowPanelInformation_pressed() -> void:
+	for child in bar_container.get_children():
+		if child is Button:
+			child.disabled = false
+	show_panel_information.visible = false
+	panel_information.visible = true

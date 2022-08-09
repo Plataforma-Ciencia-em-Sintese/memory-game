@@ -52,4 +52,4 @@ extends Control
 
 
 func _on_Button_pressed() -> void:
-	get_tree().change_scene("res://resume/resume.tscn")
+	get_tree().change_scene("res://home/home.tscn")

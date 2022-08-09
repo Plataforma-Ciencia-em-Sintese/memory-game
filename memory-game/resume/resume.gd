@@ -25,8 +25,8 @@ extends Control
 
 
 #  [ONREADY_VARIABLES]
-onready var article_summary: Label = $"MarginContainer/AspectRatioContainer/MarginContainer/VBoxContainer/HBoxContainer2/Panel/MarginContainer/VBoxContainer/Text"
-onready var background_texture := $BackgroundTexture
+onready var article_summary: Label = $"MarginContainer/Panel/VBoxContainer/HBoxContainer2/Panel/MarginContainer/VBoxContainer/Text"
+
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -50,8 +50,8 @@ func _ready() -> void:
 
 #  [PRIVATE_METHODS]
 func _load_theme() -> void:
-	background_texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
-	background_texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
+	#article_summary.set("custom_colors/font_color", ThemeResources.get_color(ThemeResources.PD3))
+	pass
  
 
 #  [SIGNAL_METHODS]

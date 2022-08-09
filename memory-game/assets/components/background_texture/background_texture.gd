@@ -25,7 +25,8 @@ extends Control
 
 
 #  [ONREADY_VARIABLES]
-onready var animation := $AnimationPlayer
+onready var color := $"Color"
+onready var texture := $"Texture"
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -35,15 +36,9 @@ onready var animation := $AnimationPlayer
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
-	_load_theme()
-	
-	animation.play("fade")
-	yield(animation, "animation_finished")
-	
-	if Api.get_skip_article():
-		get_tree().change_scene("res://home/home.tscn")
-	else:
-		get_tree().change_scene("res://resume/resume.tscn")
+	color.color = ThemeResources.get_color(ThemeResources.PB)
+	texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
+	texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -55,8 +50,6 @@ func _ready() -> void:
 
 
 #  [PRIVATE_METHODS]
-func _load_theme() -> void:
-	pass
-
+ 
 
 #  [SIGNAL_METHODS]
