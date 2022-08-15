@@ -29,41 +29,33 @@ var failed_attempt: int = 0
 
 
 #  [PRIVATE_VARIABLES]
-onready var _card_images: PoolStringArray = [
-	"res://game/card/local_images/alma_de_gato.png",
-	"res://game/card/local_images/arapaçu_pardo.png", 
-	"res://game/card/local_images/araçari_de_pescoço_vermelho.png", 
-	"res://game/card/local_images/bico-virado-miúdo.png", 
-	"res://game/card/local_images/choquinha_de_flanco_branco.png", 
-	"res://game/card/local_images/papa_formiga_barrado.png", 
-	"res://game/card/local_images/periquito_testinha.png", 
-	"res://game/card/local_images/sai_de_perna_amarela.png", 
-	"res://game/card/local_images/surucuá_de_barriga_amarela.png", 
-	"res://game/card/local_images/tucano_de_bico_preto.png",
-	"res://game/card/local_images/card_11.png",
-	"res://game/card/local_images/card_12.png",
-]
-var _load_card_images: PoolStringArray = []
+var _cards: Array = Array() \
+		setget set_cards, get_cards
+
 var _current_mode: int = GameMode.EASY \
 		setget set_current_mode, get_current_mode
-var turned_cards: Array = []
+var turned_cards: Array = Array()
 var _timer_has_started: bool = false \
 		setget set_timer_has_starded, get_timer_has_started
-var _timer_counter: int = 0 \
+var _timer_counter: int = int() \
 		setget set_timer_counter, get_timer_counter
 
 
 #  [ONREADY_VARIABLES]
 onready var CardButton := preload("res://game/card/card.tscn")
-onready var grid := $MarginContainer/AspectRatioContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer
-onready var timer_label := $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/Time
+onready var HowToPlay := preload("res://how_to_play/how_to_play.tscn")
+onready var grid := $"MarginContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer"
+onready var timer_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Time"
+onready var level_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Level"
 onready var timer:= $Timer
+onready var bar_container := $"MarginContainer/VBoxContainer/BarContainer"
 onready var dev_mode = $DevMode
-onready var fullscreen = $MarginContainer/AspectRatioContainer/VBoxContainer/BarContainer/FullScreen
+onready var fullscreen = $"MarginContainer/VBoxContainer/BarContainer/FullScreen"
 onready var panel_information = $PanelInformation
 onready var total_stars = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/CongratulationsContainer/TotalStars
 onready var total_time = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/TimeContainer/TotalTime
 onready var total_attempts = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/AttemptsContainer/TotalAttempts
+onready var show_panel_information := $ShowPanelInformation
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -73,6 +65,8 @@ onready var total_attempts = $PanelInformation/GlobalContainer/MarginContainer/V
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
+	_load_theme()
+	
 	connect("add_cards", self, "_on_add_cards")
 	connect("failed_attempt", self, "_on_failed_attempt")
 	connect("start_timer", self, "_on_start_timer")
@@ -94,25 +88,39 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 
 
 #  [PUBLIC_METHODS]
+func set_cards(new_cards: Array) -> void:
+	for card in new_cards:
+		_cards.append(card)
+
+
+func get_cards() -> Array:
+	return _cards
+
+
 func set_current_mode(mode: int) -> void:
 	_current_mode = mode
 	
+	
+	get_cards().clear()
 	for child in grid.get_children():
 		child.queue_free()
 	
 	match(mode):
 		GameMode.EASY:
-			load_card_images()
+			level_label.text = "Fácil"
+			set_cards(GameResources.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 
 		GameMode.MEDIUM:
-			load_card_images()
+			level_label.text = "Médio"
+			set_cards(GameResources.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 			
 		GameMode.HARD:
-			load_card_images()
+			level_label.text = "Difícil"
+			set_cards(GameResources.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 
@@ -137,42 +145,37 @@ func get_timer_counter() -> int:
 	return _timer_counter
 
 
-func load_card_images() -> void: #path: String) -> void:
-#	var dir := Directory.new()
-#	if dir.open(path) == OK:
-#		dir.list_dir_begin()
-#		var file_name = dir.get_next()
-#		while file_name != "":
-#			if file_name.get_extension() in ["webp"]:
-#				if not file_name.get_file() in ["back.webp", "base.webp"]:
-#					_card_images.append(path + file_name)
-#			file_name = dir.get_next()
-#	else:
-#		print("An error occurred when trying to access the path.")
-	_load_card_images = _card_images
+#func random_number(start: int, end: int) -> int:
+#	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+#	rng.randomize()
+#	return rng.randi_range(start, end)
 
 
+func random_card() -> Dictionary:
+	var random: RandomNumberGenerator = RandomNumberGenerator.new()
+	random.randomize()
+	
+	var random_index: int = random.randi_range(0, get_cards().size() -1)
 
-func random_number(start: int, end: int) -> int:
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.randomize()
-	return rng.randi_range(start, end)
-
-
-func get_random_image() -> String:
-	var random_index: int = random_number(0, _load_card_images.size() -1)
-#	var result: Texture = load(_load_card_images[random_index])
-	var result: String = _load_card_images[random_index]
-	_load_card_images.remove(random_index)
-	return result
+	var result: Dictionary = get_cards()[random_index]
+	get_cards().remove(random_index)
+	
+	return result # {subtitle: String, texture: ImageTexture}
 
 
 func shuffle_cards() -> void:
 	var steps: int = 2
+	var random: RandomNumberGenerator = RandomNumberGenerator.new()
+	
 	for _i in range(0, steps):
 		for card in grid.get_children():
 			var temporary_position: Vector2 = Vector2(0.0, 0.0)
-			var ramdom_card := grid.get_child(random_number(0, grid.get_children().size()-1))
+			
+			#var ramdom_card := grid.get_child(random_number(0, grid.get_children().size()-1))
+			randomize()
+			random.randomize()
+			var ramdom_card := grid.get_child(random.randi_range(0, grid.get_children().size()-1))
+			
 			temporary_position = card.get_position()
 			card.set_position(ramdom_card.get_position())
 			ramdom_card.set_position(temporary_position)
@@ -185,38 +188,50 @@ func shuffle_cards() -> void:
 func show_cards(time: float) -> void:
 	yield(get_tree().create_timer(time), "timeout")
 	for card in grid.get_children():
-		card.to_spin()
-
+		if card.get_state() == card.State.FRONT:
+			card.turn_animation()
 
 #  [PRIVATE_METHODS]
+func _load_theme() -> void:
+	pass
+
+
 func _make_grid(mode: int):
 	var total_cards: int = 0
 	var card_size: Vector2 = Vector2.ZERO
+	
 	match(mode):
 		GameMode.EASY:
 			grid.columns = 4
 			total_cards = 12
-			card_size = Vector2(228, 242)
+			card_size = Vector2(256, 256)
 		GameMode.MEDIUM:
 			grid.columns = 5
 			total_cards = 20
-			card_size = Vector2(178, 192)
+			card_size = Vector2(200, 200)
 		GameMode.HARD:
 			grid.columns = 6
 			total_cards = 24
-			card_size = Vector2(144, 160)
+			card_size = Vector2(180, 180)
 	
 # warning-ignore:integer_division
 	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
-		var texture_path: String = get_random_image() #load("res://cards/papa_formiga_barrado.webp") 
-		var texture: Texture = load(texture_path)
+		
+		var card: Dictionary = random_card()
+#		for child in grid.get_children():
+#			if card.has("subtitle"):
+#				if child.get_subtitle() == card["subtitle"]:
+#					return
+		
 		for _j in range(0, 2):
-			var card := CardButton.instance()
-			grid.add_child(card)
-			card.rect_min_size = card_size
-			card.set_card_image(texture)
-			card.set_card_name(texture_path)
-			card.connect("card_turned", self, "_on_card_turned")
+			var new_card := CardButton.instance()
+			grid.add_child(new_card)
+			new_card.rect_min_size = card_size
+			if card.has("texture"):
+				new_card.set_front_image(card["texture"])
+			if card.has("subtitle"):	
+				new_card.set_subtitle(card["subtitle"])
+			new_card.connect("card_turned", self, "_on_card_turned")
 			
 	emit_signal("add_cards")
 
@@ -239,9 +254,73 @@ func _toggle_fullscreen_button_icon() -> void:
 		false:
 			fullscreen.text = fullscreen_on
 
+func _scoring_rules() -> int:
+	var first_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/First")
+	var second_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Second")
+	var third_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Third")
+	
+	var target_attempt: int = 0
+	var margin_attempt: int = 0
+	var target_time: int = 0
+	var margin_time: int = 0
+	var stars: int = 0
+	var stars_check: bool = false
+	
+	match(get_current_mode()):
+		GameMode.EASY:
+			target_attempt = 10
+			margin_attempt = 5
+			target_time = 40
+			margin_time = 10
+			
+		GameMode.MEDIUM:
+			target_attempt = 20
+			margin_attempt = 5
+			target_time = 70
+			margin_time = 10
+			
+		GameMode.HARD:
+			target_attempt = 30
+			margin_attempt = 5
+			target_time = 90
+			margin_time = 10
+	
+	# three stars
+	if get_timer_counter() < target_time and failed_attempt < target_attempt:
+		if not stars_check:
+			stars = 3
+			stars_check = true
+	
+	# two stars
+	elif get_timer_counter() < (target_time + margin_time) and failed_attempt < (target_attempt + margin_attempt):
+		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		if not stars_check:
+			stars = 2
+			stars_check = true
+	
+	# one stars
+	elif (get_timer_counter() < (target_time + margin_time) and failed_attempt > (target_attempt + margin_attempt)) or \
+			(get_timer_counter() > (target_time + margin_time) and failed_attempt < (target_attempt + margin_attempt)):
+		second_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		if not stars_check:
+			stars = 1
+			stars_check = true
+	
+	# zero stars
+	elif get_timer_counter() > (target_time + margin_time) and failed_attempt > (target_attempt + margin_attempt):
+		first_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		second_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
+		if not stars_check:
+			stars = 0
+			stars_check = true
+	
+	return stars
+
 
 func _update_panel_information() -> void:
-	total_stars.bbcode_text = "Você completou o nível!\nConseguiu [color=#aa7bc3][b]0[/b][/color] estrelas."
+	total_stars.bbcode_text = str("Você completou o nível!\nConseguiu [color=#aa7bc3][b]", str(_scoring_rules()), "[/b][/color] estrelas.")
 	total_time.text = timer_label.text
 	total_attempts.text = str(failed_attempt)
 
@@ -265,21 +344,29 @@ func _on_card_turned(card_instance) -> void:
 	if turned_cards.size() == 1:
 		for card in grid.get_children():
 			card.disabled = true
+			#if card.get_state() == card.State.BACK:
+				#card.lock_card_label.visible = true
 		yield(get_tree().create_timer(1.0), "timeout")
-		if turned_cards[0].get_card_name() == card_instance.get_card_name():
-			card_instance.set_current_state(card_instance.State.COMPLETED)
-			turned_cards[0].set_current_state(turned_cards[0].State.COMPLETED)
+		if turned_cards[0].get_subtitle() == card_instance.get_subtitle():
+			card_instance.set_state(card_instance.State.COMPLETED)
+			turned_cards[0].set_state(turned_cards[0].State.COMPLETED)
 			turned_cards.clear()
 		else:
-			card_instance.to_spin()
-			turned_cards[0].to_spin()
-			yield(turned_cards[0], "spin_completed")
+			card_instance.turn_animation()
+			turned_cards[0].turn_animation()
+			yield(turned_cards[0], "turnning_completed")
+			card_instance.disabled = false
+			#card_instance.lock_card_label.visible = false
+			turned_cards[0].disabled = false
+			#turned_cards[0].lock_card_label.visible = false
+			
 			turned_cards.clear()
 			emit_signal("failed_attempt")
 			
 		for card in grid.get_children():
-			if card.get_current_state() == card.State.BACK:
+			if card.get_state() == card.State.BACK:
 				card.disabled = false
+				#card.lock_card_label.visible = false
 
 	is_full_level()
 
@@ -298,7 +385,7 @@ func is_full_level() -> void:
 	var remaining_pairs_counter: int = 0
 	
 	for card in grid.get_children():
-			if not card.get_current_state() == card.State.COMPLETED:
+			if not card.get_state() == card.State.COMPLETED:
 				remaining_pairs_counter += 1
 	
 	if remaining_pairs_counter == 0:
@@ -308,13 +395,10 @@ func is_full_level() -> void:
 
 func _on_Restart_pressed() -> void:
 	yield(get_tree().create_timer(0.5), "timeout")
-	_reset_counters()
 	if turned_cards.empty():
-		for card in grid.get_children():
-			card.set_current_state(card.State.FRONT)
-			card.disabled = false
-		shuffle_cards()
-		show_cards(0.5)
+		_reset_counters()
+		set_cards(Array())
+		set_current_mode(get_current_mode())
 
 
 func _on_Timer_timeout() -> void:
@@ -367,13 +451,10 @@ func _on_show_PanelInformation() -> void:
 func _on_PanelInformation_Restart_pressed() -> void:
 	panel_information.visible = false
 	yield(get_tree().create_timer(0.5), "timeout")
-	_reset_counters()
 	if turned_cards.empty():
-		for card in grid.get_children():
-			card.set_current_state(card.State.FRONT)
-			card.disabled = false
-		shuffle_cards()
-		show_cards(0.5)
+		_reset_counters()
+		set_cards(Array())
+		set_current_mode(get_current_mode())
 
 
 func _on_PanelInformation_Skip_pressed() -> void:
@@ -388,3 +469,32 @@ func _on_PanelInformation_Skip_pressed() -> void:
 			set_current_mode(GameMode.EASY)
 	
 	panel_information.visible = false
+
+
+func _on_Hide_pressed() -> void:
+	for child in bar_container.get_children():
+		if child is Button:
+			child.disabled = true
+			
+	panel_information.visible = false
+	show_panel_information.visible = true
+
+
+func _on_ShowPanelInformation_pressed() -> void:
+	for child in bar_container.get_children():
+		if child is Button:
+			child.disabled = false
+	show_panel_information.visible = false
+	panel_information.visible = true
+
+
+func _on_Help_pressed() -> void:
+	timer.stop()
+	var how_to_play := HowToPlay.instance()
+	add_child(how_to_play)
+	how_to_play.connect("close", self, "_on_HowToPlay_close")
+
+
+func _on_HowToPlay_close() -> void:
+	if get_timer_counter() > 0:
+		timer.start()

@@ -8,11 +8,11 @@ extends TextureButton
 
 #  [SIGNALS]
 signal card_turned(card)
-signal spin_completed
+signal turnning_completed
 
 
 #  [ENUMS]
-enum State {FRONT, BACK, COMPLETED}
+enum State {FRONT, BACK, TURNNING, COMPLETED}
 
 
 #  [CONSTANTS]
@@ -24,122 +24,148 @@ enum State {FRONT, BACK, COMPLETED}
 #  [PUBLIC_VARIABLES]
 
 
-#  [PRIVATE_VARIABLES] 
-var _card_front_image: Texture = null
-var _card_back_image: Texture = null
-var _current_state: int = State.FRONT \
-		setget set_current_state, get_current_state
-var _card_name: String = "" \
-		setget set_card_name, get_card_name
+#  [PRIVATE_VARIABLES]
+var _state: int = State.FRONT \
+		setget set_state, get_state
+		
+var _front_image = null \
+		setget set_front_image, get_front_image
+		
+var _back_image = null \
+		setget set_back_image, get_back_image
+
+var _current_image: int = State.FRONT
+
+var _subtitle: String = "#" \
+		setget set_subtitle, get_subtitle 
 
 
 #  [ONREADY_VARIABLES]
-onready var label := $Label
-onready var tween := $Tween
+onready var animation := $AnimationPlayer
+onready var subtitle_label := $Subtitle
+onready var lock_card_label := $LockCard
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
-#func _init(image: Texture) -> void:
+#func _init() -> void:
 #	pass
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
-	_card_front_image = load("res://game/card/local_images/periquito_testinha.png")
-	_card_back_image = load("res://game/card/back_card.png")
-	texture_normal = _card_front_image
+	#set_front_image(load("res://game/card/local_images/periquito_testinha.png"))
+	set_back_image(load("res://game/card/back_card.png"))
+	#texture_normal = get_front_image()
 
 
-#  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
-#func _process(_delta: float)%VOID_RETURN:
+
+#  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
+#func _process(_delta: float) -> void:
 #	pass
 
 
 #  [PUBLIC_METHODS]
-func set_current_state(state: int) -> void:
-	_current_state = state
-	
-	match(_current_state):
+func set_state(new_state: int) -> void:
+	match(new_state): # enum State {FRONT, BACK, TURNNING, COMPLETED}
 		State.FRONT:
-			set_card_image(_card_front_image)
+			_state = new_state
+			_current_image = new_state
 			self_modulate = Color(1.0, 1.0, 1.0, 1.0) 
+		
 		State.BACK:
-			label.visible = false
-			set_card_image(_card_back_image)
-			self_modulate = Color(1.0, 1.0, 1.0, 1.0) 
+			_state = new_state
+			_current_image = new_state
+			subtitle_label.visible = false
+			self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+		
+		State.TURNNING:
+			_state = new_state
+		
 		State.COMPLETED:
+			_state = new_state
+			#lock_card_label.visible = false
 			disabled = true
-			label.visible = true
+			subtitle_label.visible = true
 			self_modulate = Color(0.65, 0.65, 0.65, 1.0) 
+		_:
+			pass
+
+#		State.FRONT:
+#			set_card_image(_card_front_image)
+			
+#		State.BACK:
+#			set_card_image(_card_back_image)
+			 
 
 
-func get_current_state() -> int:
-	return _current_state
+func get_state() -> int:
+	return _state
 
 
-func get_current_image() -> Texture:
-	return texture_normal
+func set_front_image(new_front_image) -> void:
+	_front_image = new_front_image
+	texture_normal = new_front_image
 
 
-func set_card_image(image: Texture) -> void:
-	self.texture_normal = image
-	
-	if not image == _card_back_image:
-		_card_front_image = image
+func get_front_image():
+	return _front_image
 
 
-func set_card_name(new_name: String) -> void:
-	new_name = new_name.replace("res://game/card/local_images/", "")
-	new_name = new_name.replace(".png", "")
-	new_name = new_name.replace("_", " ")
-	_card_name = new_name
-	label.text = new_name.capitalize()
+func set_back_image(new_back_image) -> void:
+	_back_image = new_back_image
 
 
-func get_card_name() -> String:
-	return _card_name
+func get_back_image():
+	return _back_image
 
 
-func to_spin() -> void:
-	var temporary_scale_x: float = get_scale().x
-	
-	rect_pivot_offset = Vector2(rect_size.x/2, rect_size.x/2)
-	
-	tween.interpolate_property(self, "rect_scale:x", temporary_scale_x, 0.0, 0.1,
-			Tween.TRANS_LINEAR,Tween.EASE_OUT)
-	tween.start()
-	
-	yield(tween, "tween_completed")
-	match(get_current_state()):
+func set_subtitle(new_subtitle: String) -> void:
+	_subtitle = new_subtitle
+	subtitle_label.text = new_subtitle
+
+func get_subtitle() -> String:
+	return _subtitle
+
+
+func turn_animation() -> void:
+	match(get_state()): # enum State {FRONT, BACK, TURNNING, COMPLETED}
 		State.FRONT:
-			set_current_state(State.BACK)
+			set_state(State.TURNNING)
+			animation.play("turn")
+			yield(animation, "animation_finished")
+			set_state(State.BACK)
+		
 		State.BACK:
-			set_current_state(State.FRONT)
+			set_state(State.TURNNING)
+			animation.play_backwards("turn")
+			yield(animation, "animation_finished")
+			set_state(State.FRONT)
 	
-	tween.interpolate_property(self, "rect_scale:x", 0.0, temporary_scale_x, 0.1,
-			Tween.TRANS_LINEAR,Tween.EASE_OUT)
-	tween.start()
-	
-	yield(tween, "tween_completed")
-	
-	emit_signal("spin_completed")
+	emit_signal("turnning_completed")
 
 
 #  [PRIVATE_METHODS]
+func _exchange_images() -> void:
+	match(_current_image): # enum State {FRONT, BACK, TURNNING, COMPLETED}
+		State.FRONT:
+			texture_normal = _back_image
+		State.BACK:
+			texture_normal = _front_image
+		_:
+			pass
+
+func _calculate_pivot_offset() -> void:
+	rect_pivot_offset.x = rect_size.x / 2
+	rect_pivot_offset.y = rect_size.y / 2
  
 
 #  [SIGNAL_METHODS]
 func _on_CardButton_pressed() -> void:
 	disabled = true
-	to_spin()
+	#lock_card_label.visible = true
+	turn_animation()
 	emit_signal("card_turned", self)
 
 
-func _on_CardButton_mouse_entered() -> void:
-#	if get_current_state() == State.FRONT:
-#		label.visible = true
-	pass
 
-func _on_CardButton_mouse_exited() -> void:
-	if get_current_state() == State.FRONT:
-		label.visible = false
+
