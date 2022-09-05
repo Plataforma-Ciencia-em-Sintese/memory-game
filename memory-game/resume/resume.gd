@@ -37,7 +37,7 @@ onready var article_summary: Label = $"MarginContainer/Panel/VBoxContainer/HBoxC
 func _ready() -> void:
 	_load_theme()
 	
-	article_summary.text = GameResources.get_article_summary() + "\n\n Bom Divertimento!"
+	article_summary.text = API.common.get_article_summary() + "\n\n Bom Divertimento!"
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]

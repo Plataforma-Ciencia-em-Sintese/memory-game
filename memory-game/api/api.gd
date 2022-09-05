@@ -1,60 +1,72 @@
 #tool
-#class_name Api #, res://class_name_icon.svg
+#class_name API #, res://class_name_icon.svg
 extends Node
 
 
 #  [DOCSTRING]
-"""This class is an API that receives parameters from the Omeka API."""
 
 
 #  [SIGNALS]
-signal read_url_parameters_completed
-signal main_request_completed
+signal all_request_completed
+signal a_request_completed
+signal all_request_failed
 
 
 #  [ENUMS]
 
 
 #  [CONSTANTS]
-const BASE_URL: String = "https://repositorio.canalciencia.ibict.br/api/items/"
-const RESOURCE_MODEL_ID: int = 19
 
 
 #  [EXPORTED_VARIABLES]
 
 
 #  [PUBLIC_VARIABLES]
+var common: RequestCommon
+var game: RequestGame
+var theme: RequestTheme
 
 
 #  [PRIVATE_VARIABLES]
-var _game_id: int = 23391 \
-		setget set_game_id, get_game_id
-		
-var _skip_article: bool = false \
-		setget set_skip_article, get_skip_article
-		
-var _resource: Dictionary = {} \
-		setget set_resource, get_resource
+var _is_common_completed: bool = false \
+		setget set_is_common_completed, get_is_common_completed
+
+var _is_game_completed: bool = false \
+		setget set_is_game_completed, get_is_game_completed
+
+var _is_theme_completed: bool = false \
+		setget set_is_theme_completed, get_is_theme_completed
+
+var _is_request_error: bool = false \
+		setget set_is_request_error, get_is_request_error
 
 
 #  [ONREADY_VARIABLES]
-onready var http_request: HTTPRequest = HTTPRequest.new()
-
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
-#func _init() -> void:
-#	pass
+func _init() -> void:
+	common = RequestCommonOmeka.new()
+	game = RequestGameOmeka.new()
+	theme = RequestThemeOmeka.new()
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
-	connect("read_url_parameters_completed", self, "_on_Api_read_url_parameters_completed")
+	connect("a_request_completed", self, "_on_a_request_completed")
 	
-	add_child(http_request)
-	http_request.connect("request_completed", self, "_on_HTTPRequest_request_completed")
+	add_child(common)
+	common.connect("all_request_common_completed", self, "_on_all_request_common_completed")
+	common.connect("request_error", self, "_on_request_error")
 	
-	_read_url_parameters()
+	
+	add_child(game)
+	game.connect("all_request_game_completed", self, "_on_all_request_game_completed")
+	game.connect("request_error", self, "_on_request_error")
+	
+	add_child(theme)
+	theme.connect("all_request_theme_completed", self, "_on_all_request_theme_completed")
+	theme.connect("request_error", self, "_on_request_error")
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -63,101 +75,121 @@ func _ready() -> void:
 
 
 #  [PUBLIC_METHODS]
-func set_game_id(new_id: int) -> void:
-	_game_id = new_id
+func set_is_common_completed(new_value: bool) -> void:
+	_is_common_completed = new_value
 
 
-func get_game_id() -> int:
-	return _game_id
+func get_is_common_completed() -> bool:
+	return _is_common_completed
 
 
-func set_skip_article(new_value: bool) -> void:
-	_skip_article = new_value
+func set_is_game_completed(new_value: bool) -> void:
+	_is_game_completed = new_value
 
 
-func get_skip_article() -> bool:
-	return _skip_article
-
-func set_resource(new_resource: Dictionary) -> void:
-	_resource = new_resource
+func get_is_game_completed() -> bool:
+	return _is_game_completed
 
 
-func get_resource() -> Dictionary:
-	return _resource
+func set_is_theme_completed(new_value: bool) -> void:
+	_is_theme_completed = new_value
+
+
+func get_is_theme_completed() -> bool:
+	return _is_theme_completed
+
+
+func set_is_request_error(new_value: bool) -> void:
+	_is_request_error = new_value
+
+
+func get_is_request_error() -> bool:
+	return _is_request_error
+
+
+func is_all_request_completed() -> bool:
+	if get_is_common_completed():
+		if get_is_game_completed():
+			if get_is_theme_completed():
+				return true
+
+	return false
 
 
 #  [PRIVATE_METHODS]
-func _read_url_parameters() -> void:
-	# Get URL parameters
-	var raw_string: String = ""
-	if str(OS.get_name()) == "HTML5":
-		# The Javascript Class only works for HTML5.
-		raw_string = str(JavaScript.eval("location.search.split('?')[1];"))
-	else:
-		# For testing in environments other than HTML5.
-		var fake_url_parameters: String = "id=23391&trash=000&skip=0"
-		raw_string = fake_url_parameters
-
-	var strings: PoolStringArray = raw_string.split("&")
-
-	var parameters: Dictionary = {}
-	for item in strings:
-		parameters[item.split("=")[0]] = item.split("=")[1]
-
-	# Set ID
-	if parameters.has("id"):
-		set_game_id(int(parameters["id"]))
-
-	# Set Skip Article
-	if parameters.has("skip"):
-		match(int(parameters["skip"])):
-			0:
-				set_skip_article(false)
-			1:
-				set_skip_article(true)
-			_:
-				set_skip_article(false)
-
-	emit_signal("read_url_parameters_completed")
-
+ 
 
 #  [SIGNAL_METHODS]
-func _on_Api_read_url_parameters_completed() -> void:
-	var url: String = BASE_URL + str(get_game_id())
-	var ssl_validate_domain: bool = true if OS.get_name() == "HTML5" else false
+func _on_all_request_common_completed() -> void:
+	print("_on_all_request_common_completed()")
+	set_is_common_completed(true)
+	emit_signal("a_request_completed")
+
+
+func _on_all_request_game_completed() -> void:
+	print("_on_all_request_game_completed()")
+	set_is_game_completed(true)
+	emit_signal("a_request_completed")
 	
-	var error: int = http_request.request(url, PoolStringArray(), ssl_validate_domain)
-	if error != OK:
-		push_error("An error occurred in the HTTP request.")
+#	var scroll := ScrollContainer.new()
+#	add_child(scroll)
+#	scroll.anchor_bottom = 1.0
+#	scroll.anchor_right = 1.0
+#
+#	var grid := GridContainer.new()
+#	scroll.add_child(grid)
+#
+#	for card in game.get_cards():
+#		var texture_rect := TextureRect.new()
+#		grid.add_child(texture_rect)
+#		texture_rect.texture = card["image"]
+#
+#		var label := Label.new()
+#		texture_rect.add_child(label)
+#		label.text = card["subtitle"]
 
 
-func _on_HTTPRequest_request_completed(_result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray) -> void:
-	if response_code == 200:
-		var json := JSON.parse(body.get_string_from_utf8())
-		#print(str(JSON.print(json.result, "\t")))
-		
-		match(typeof(json.result)):
-#			TYPE_ARRAY:
-#				push_error("JSON return Array type. While a dictionary type was expected")
-			
-			TYPE_DICTIONARY:
-				#print("Response Code: ", response_code,", JSON return Dictionary type.\n\n")
-				
-				# Checks if the ID parameter passed by URL is valid.
-				if json.result.has("errors"):
-					if json.result["errors"].has("error"):
-						push_error(str(json.result["errors"]["error"]))
-				
-				# Checks if the resource model ID matches as expected.
-				elif json.result.has("o:resource_template"):
-					if json.result["o:resource_template"].has("o:id"):
-						if int(json.result["o:resource_template"]["o:id"]) == RESOURCE_MODEL_ID:
-							set_resource(json.result)
-							emit_signal("main_request_completed")
-						else:
-							push_error("The resource model ID is valid but does not match as expected.")
-							
-			_:
-				push_error("Unexpected results from JSON response.")
-	else:
-		push_error(str("response code return error: ", response_code))
+func _on_all_request_theme_completed() -> void:
+	print("_on_all_request_theme_completed()")
+	set_is_theme_completed(true)
+	emit_signal("a_request_completed")
+	
+#	prints("\nPrimary color:", theme.get_primary_color().to_html(false))
+#	prints("PB:", theme.get_color(theme.PB).to_html(false))
+#	prints("PL1:", theme.get_color(theme.PL1).to_html(false))
+#	prints("PL2:", theme.get_color(theme.PL2).to_html(false))
+#	prints("PL3:", theme.get_color(theme.PL3).to_html(false))
+#	prints("PD1:", theme.get_color(theme.PD1).to_html(false))
+#	prints("PD2:", theme.get_color(theme.PD2).to_html(false))
+#	prints("PD3:", theme.get_color(theme.PD3).to_html(false))
+#
+#	prints("\nSecondary color:", theme.get_secondary_color().to_html(false))
+#	prints("SB:", theme.get_color(theme.SB).to_html(false))
+#	prints("SL1:", theme.get_color(theme.SL1).to_html(false))
+#	prints("SL2:", theme.get_color(theme.SL2).to_html(false))
+#	prints("SL3:", theme.get_color(theme.SL3).to_html(false))
+#	prints("SD1:", theme.get_color(theme.SD1).to_html(false))
+#	prints("SD2:", theme.get_color(theme.SD2).to_html(false))
+#	prints("SD3:", theme.get_color(theme.SD3).to_html(false))
+#
+#	var texture_rect: TextureRect = TextureRect.new()
+#	add_child(texture_rect)
+#	texture_rect.expand = true
+#	texture_rect.stretch_mode = TextureRect.STRETCH_TILE
+#	texture_rect.anchor_bottom = 1.0
+#	texture_rect.anchor_right = 1.0
+#	texture_rect.texture = theme.get_background_texture()
+
+
+func _on_a_request_completed() -> void:
+	#prints(get_is_common_completed(), get_is_game_completed(), get_is_theme_completed())
+	if is_all_request_completed():
+		emit_signal("all_request_completed")
+
+
+func _on_request_error(request_failed: String) -> void:
+	if not get_is_request_error():
+		set_is_request_error(true)
+		emit_signal("all_request_failed")
+	
+	push_error(request_failed)

@@ -1,6 +1,6 @@
 #tool
 #class_name Name #, res://class_name_icon.svg
-extends Control
+extends Node
 
 
 #  [DOCSTRING]
@@ -25,7 +25,6 @@ extends Control
 
 
 #  [ONREADY_VARIABLES]
-onready var animation := $AnimationPlayer
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -34,20 +33,8 @@ onready var animation := $AnimationPlayer
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-func _ready() -> void:
-	animation.play("fade")
-	yield(animation, "animation_finished")
-	
-	var parameters: Dictionary = URL.get_parameters("https://.../?id=23391&skip=0")
-	if parameters.has("skip"):
-		match(int(parameters["skip"])):
-			0:
-				get_tree().change_scene("res://resume/resume.tscn")
-			1:
-				get_tree().change_scene("res://home/home.tscn")
-			_:
-				get_tree().change_scene("res://resume/resume.tscn")
-
+#func _ready() -> void:
+#	pass
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -59,6 +46,6 @@ func _ready() -> void:
 
 
 #  [PRIVATE_METHODS]
-
+ 
 
 #  [SIGNAL_METHODS]

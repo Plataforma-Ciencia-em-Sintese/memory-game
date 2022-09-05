@@ -108,19 +108,19 @@ func set_current_mode(mode: int) -> void:
 	match(mode):
 		GameMode.EASY:
 			level_label.text = "Fácil"
-			set_cards(GameResources.get_cards())
+			set_cards(API.game.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 
 		GameMode.MEDIUM:
 			level_label.text = "Médio"
-			set_cards(GameResources.get_cards())
+			set_cards(API.game.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 			
 		GameMode.HARD:
 			level_label.text = "Difícil"
-			set_cards(GameResources.get_cards())
+			set_cards(API.game.get_cards())
 			_make_grid(get_current_mode())
 			show_cards(0.5)
 
@@ -227,8 +227,8 @@ func _make_grid(mode: int):
 			var new_card := CardButton.instance()
 			grid.add_child(new_card)
 			new_card.rect_min_size = card_size
-			if card.has("texture"):
-				new_card.set_front_image(card["texture"])
+			if card.has("image"):
+				new_card.set_front_image(card["image"])
 			if card.has("subtitle"):	
 				new_card.set_subtitle(card["subtitle"])
 			new_card.connect("card_turned", self, "_on_card_turned")

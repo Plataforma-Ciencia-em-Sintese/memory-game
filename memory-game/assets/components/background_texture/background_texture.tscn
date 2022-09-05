@@ -54,7 +54,7 @@ func _ready() -> void:
 
 #  [PRIVATE_METHODS]
 func _load_theme() -> void:
-	set(\"self_modulate\", ThemeResources.get_color(ThemeResources.PD1))
+	set(\"self_modulate\", API.theme.get_color(API.theme.PD1))
  
 
 #  [SIGNAL_METHODS]

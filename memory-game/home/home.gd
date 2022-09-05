@@ -26,7 +26,6 @@ extends Control
 
 #  [ONREADY_VARIABLES]
 onready var game_title: Label = $"MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo/Tittle"
-onready var background_texture := $BackgroundTexture
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -37,7 +36,7 @@ onready var background_texture := $BackgroundTexture
 func _ready() -> void:
 	_load_theme()
 	
-	game_title.text = GameResources.get_game_tittle().to_upper()
+	game_title.text = API.common.get_short_title().to_upper()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -51,8 +50,7 @@ func _ready() -> void:
 #  [PRIVATE_METHODS]
 func _load_theme() -> void:
 	pass
-#	background_texture.set("modulate", ThemeResources.get_color(ThemeResources.PL3))
-#	background_texture.set("self_modulate", Color(1.0, 1.0, 1.0, 0.04))
+
  
 
 #  [SIGNAL_METHODS]
