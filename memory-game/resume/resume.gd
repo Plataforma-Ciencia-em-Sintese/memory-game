@@ -37,7 +37,7 @@ onready var article_summary: Label = $"MarginContainer/Panel/VBoxContainer/HBoxC
 func _ready() -> void:
 	_load_theme()
 	
-	article_summary.text = API.common.get_article_summary() + "\n\n Bom Divertimento!"
+	article_summary.text = API.common.get_article_summary() #+ "\n\n Bom Divertimento!"
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -50,8 +50,7 @@ func _ready() -> void:
 
 #  [PRIVATE_METHODS]
 func _load_theme() -> void:
-	#article_summary.set("custom_colors/font_color", ThemeResources.get_color(ThemeResources.PD3))
-	pass
+	article_summary.set("custom_colors/font_color", API.theme.get_color(API.theme.PD2))
  
 
 #  [SIGNAL_METHODS]

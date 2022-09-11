@@ -28,7 +28,11 @@ enum {
 	SB,  # SECONDARY BASE
 	SD1, # SECONDARY DARK 1
 	SD2, # SECONDARY DARK 2
-	SD3,  # SECONDARY DARK 3
+	SD3, # SECONDARY DARK 3
+	RED, # FIXED COLORS
+	GREEN, # FIXED COLORS
+	BLACK, # FIXED COLORS
+	WHITE, # FIXED COLORS
 }
 
 
@@ -128,6 +132,16 @@ func get_color(name: int) -> Color:
 			color = get_secondary_color().darkened(intensity * 2.0)
 		SD3:
 			color = get_secondary_color().darkened(intensity * 3.0)
+		
+		# FIXED COLORS
+		RED:
+			color = Color(Color.darkred)
+		GREEN:
+			color = Color(Color.darkgreen)
+		BLACK:
+			color = Color(Color.black)
+		WHITE:
+			color = Color(Color.white)
 
 	return color
 

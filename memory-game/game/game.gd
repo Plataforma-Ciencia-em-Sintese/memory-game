@@ -193,7 +193,9 @@ func show_cards(time: float) -> void:
 
 #  [PRIVATE_METHODS]
 func _load_theme() -> void:
-	pass
+	timer_label.set("custom_colors/font_color", API.theme.get_color(API.theme.PD1))
+	var state_normal: StyleBoxFlat = timer_label.get("custom_styles/normal")
+	state_normal.set("border_color", API.theme.get_color(API.theme.PD1))
 
 
 func _make_grid(mode: int):

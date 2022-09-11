@@ -29,7 +29,7 @@ var _short_title: String = String() \
 var _article_summary: String = String() \
 		setget set_article_summary, get_article_summary
 
-var _game_logo: ImageTexture = ImageTexture.new() \
+var _game_logo: ImageTexture = null \
 		setget set_game_logo, get_game_logo
 
 

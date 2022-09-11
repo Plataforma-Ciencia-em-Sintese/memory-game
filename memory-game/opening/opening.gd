@@ -47,6 +47,8 @@ func _ready() -> void:
 				get_tree().change_scene("res://home/home.tscn")
 			_:
 				get_tree().change_scene("res://resume/resume.tscn")
+	else:
+		get_tree().change_scene("res://resume/resume.tscn")
 
 
 

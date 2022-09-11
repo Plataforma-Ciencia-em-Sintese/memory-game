@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/components/background/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://assets/themes/default/logo_home.png" type="Texture" id=4]
 [ext_resource path="res://home/home.gd" type="Script" id=5]
 [ext_resource path="res://assets/fonts/Chewy/Chewy-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/components/theme_button/theme_button.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StyleBoxFlat" id=43]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
+bg_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 200
 corner_radius_top_right = 200
 corner_radius_bottom_right = 200
@@ -20,7 +21,7 @@ shadow_size = 36
 [sub_resource type="DynamicFont" id=44]
 size = 90
 outline_size = 4
-outline_color = Color( 0.333333, 0.211765, 0.396078, 1 )
+outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 6 )
 
@@ -35,7 +36,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
+border_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -50,206 +51,11 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=3]
-size = 32
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.67451, 0.517647, 0.760784, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="DynamicFont" id=30]
 size = 45
 extra_spacing_top = -32
 extra_spacing_bottom = -32
 font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=31]
-size = 32
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=32]
-bg_color = Color( 0.67451, 0.517647, 0.760784, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=33]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=34]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=35]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=36]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="DynamicFont" id=37]
-size = 32
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=38]
-bg_color = Color( 0.67451, 0.517647, 0.760784, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=39]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=40]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=41]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=42]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="DynamicFont" id=28]
 size = 20
@@ -262,7 +68,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
+border_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -271,71 +77,6 @@ expand_margin_left = 40.0
 expand_margin_right = 40.0
 expand_margin_top = 12.0
 expand_margin_bottom = 11.0
-
-[sub_resource type="DynamicFont" id=45]
-size = 32
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=46]
-bg_color = Color( 0.67451, 0.517647, 0.760784, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=47]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=48]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=49]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=50]
-bg_color = Color( 0.603922, 0.388235, 0.721569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 6
-border_color = Color( 0.333333, 0.211765, 0.396078, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [node name="Home" type="Control"]
 anchor_right = 1.0
@@ -372,6 +113,23 @@ margin_bottom = 1004.0
 margin_right = 1060.0
 margin_bottom = 562.0
 custom_constants/separation = 27
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 1080.0
+margin_bottom = 306.0
+rect_min_size = Vector2( 399, 300 )
+size_flags_horizontal = 5
+
+[node name="Image" type="TextureRect" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo/PanelContainer"]
+margin_left = 340.0
+margin_top = 7.0
+margin_right = 739.0
+margin_bottom = 210.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
 
 [node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -413,18 +171,18 @@ align = 1
 valign = 1
 
 [node name="Tittle" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Logo"]
-margin_left = 431.0
+margin_left = 450.0
 margin_top = 477.0
-margin_right = 628.0
+margin_right = 610.0
 margin_bottom = 562.0
 rect_min_size = Vector2( 160, 85 )
 size_flags_horizontal = 6
 size_flags_vertical = 1
-custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 custom_styles/normal = SubResource( 2 )
-text = "PÁSSAROS"
+text = "NOME"
 align = 1
 valign = 1
 __meta__ = {
@@ -458,34 +216,18 @@ custom_constants/margin_left = 60
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer"]
 margin_left = 60.0
-margin_right = 460.0
+margin_right = 474.0
 margin_bottom = 158.0
 custom_constants/separation = 20
 
-[node name="Easy" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer"]
+[node name="Easy" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer" instance=ExtResource( 7 )]
 margin_top = 35.0
-margin_right = 120.0
+margin_right = 114.0
 margin_bottom = 123.0
-rect_min_size = Vector2( 120, 88 )
-focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 4
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 0.603922, 0.388235, 0.721569, 1 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
-enabled_focus_mode = 0
 text = "Fácil"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Stars" type="HBoxContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy"]
+visible = false
 anchor_top = 0.833333
 anchor_right = 1.0
 anchor_bottom = 1.83333
@@ -496,18 +238,18 @@ __meta__ = {
 }
 
 [node name="First" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy/Stars"]
-margin_left = 7.0
+margin_left = 4.0
 margin_top = 43.0
-margin_right = 34.0
+margin_right = 31.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
 
 [node name="Second" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy/Stars"]
-margin_left = 46.0
+margin_left = 43.0
 margin_top = 43.0
-margin_right = 73.0
+margin_right = 70.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
@@ -517,9 +259,9 @@ __meta__ = {
 }
 
 [node name="Third" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy/Stars"]
-margin_left = 85.0
+margin_left = 82.0
 margin_top = 43.0
-margin_right = 112.0
+margin_right = 109.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
@@ -528,31 +270,15 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Medium" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer"]
-margin_left = 140.0
+[node name="Medium" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 134.0
 margin_top = 35.0
-margin_right = 260.0
+margin_right = 266.0
 margin_bottom = 123.0
-rect_min_size = Vector2( 120, 88 )
-focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 4
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 0.603922, 0.388235, 0.721569, 1 )
-custom_fonts/font = SubResource( 31 )
-custom_styles/hover = SubResource( 32 )
-custom_styles/pressed = SubResource( 33 )
-custom_styles/focus = SubResource( 34 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 36 )
-enabled_focus_mode = 0
 text = "Médio"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Stars" type="HBoxContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium"]
+visible = false
 anchor_top = 0.833333
 anchor_right = 1.0
 anchor_bottom = 1.83333
@@ -563,18 +289,18 @@ __meta__ = {
 }
 
 [node name="First" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium/Stars"]
-margin_left = 7.0
+margin_left = 13.0
 margin_top = 43.0
-margin_right = 34.0
+margin_right = 40.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
 
 [node name="Second" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium/Stars"]
-margin_left = 46.0
+margin_left = 52.0
 margin_top = 43.0
-margin_right = 73.0
+margin_right = 79.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
@@ -584,9 +310,9 @@ __meta__ = {
 }
 
 [node name="Third" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium/Stars"]
-margin_left = 85.0
+margin_left = 91.0
 margin_top = 43.0
-margin_right = 112.0
+margin_right = 118.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
@@ -595,31 +321,15 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Hard" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer"]
-margin_left = 280.0
+[node name="Hard" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 286.0
 margin_top = 35.0
-margin_right = 400.0
+margin_right = 414.0
 margin_bottom = 123.0
-rect_min_size = Vector2( 120, 88 )
-focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 4
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 0.603922, 0.388235, 0.721569, 1 )
-custom_fonts/font = SubResource( 37 )
-custom_styles/hover = SubResource( 38 )
-custom_styles/pressed = SubResource( 39 )
-custom_styles/focus = SubResource( 40 )
-custom_styles/disabled = SubResource( 41 )
-custom_styles/normal = SubResource( 42 )
-enabled_focus_mode = 0
 text = "Difícil"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [node name="Stars" type="HBoxContainer" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard"]
+visible = false
 anchor_top = 0.833333
 anchor_right = 1.0
 anchor_bottom = 1.83333
@@ -630,18 +340,18 @@ __meta__ = {
 }
 
 [node name="First" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard/Stars"]
-margin_left = 7.0
+margin_left = 11.0
 margin_top = 43.0
-margin_right = 34.0
+margin_right = 38.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
 text = ""
 
 [node name="Second" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard/Stars"]
-margin_left = 46.0
+margin_left = 50.0
 margin_top = 43.0
-margin_right = 73.0
+margin_right = 77.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
@@ -651,9 +361,9 @@ __meta__ = {
 }
 
 [node name="Third" type="Label" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Hard/Stars"]
-margin_left = 85.0
+margin_left = 89.0
 margin_top = 43.0
-margin_right = 112.0
+margin_right = 116.0
 margin_bottom = 43.0
 custom_colors/font_color = Color( 0.666667, 0.482353, 0.764706, 1 )
 custom_fonts/font = SubResource( 30 )
@@ -670,7 +380,7 @@ margin_top = -21.0
 margin_right = 82.5
 margin_bottom = 12.0
 rect_pivot_offset = Vector2( 121, 23 )
-custom_colors/font_color = Color( 0.333333, 0.211765, 0.396078, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 28 )
 custom_styles/normal = SubResource( 29 )
@@ -681,29 +391,12 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Credits" type="Button" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options"]
-margin_left = 435.0
+[node name="Credits" parent="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options" instance=ExtResource( 7 )]
+margin_left = 444.0
 margin_top = 300.0
-margin_right = 624.0
+margin_right = 615.0
 margin_bottom = 388.0
-rect_min_size = Vector2( 189, 88 )
-focus_mode = 0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 0.603922, 0.388235, 0.721569, 1 )
-custom_fonts/font = SubResource( 45 )
-custom_styles/hover = SubResource( 46 )
-custom_styles/pressed = SubResource( 47 )
-custom_styles/focus = SubResource( 48 )
-custom_styles/disabled = SubResource( 49 )
-custom_styles/normal = SubResource( 50 )
-enabled_focus_mode = 0
 text = "Créditos"
-__meta__ = {
-"_editor_description_": ""
-}
 
 [connection signal="pressed" from="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Easy" to="." method="_on_Easy_pressed"]
 [connection signal="pressed" from="MarginContainer/AspectRatioContainer/MarginContainer/GlobalVBoxContainer/Options/Panel/MarginContainer/HBoxContainer/Medium" to="." method="_on_Medium_pressed"]

@@ -27,6 +27,7 @@ signal close
 
 
 #  [ONREADY_VARIABLES]
+onready var label: Label = $MarginContainer/VBoxContainer/Panel/Label
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -35,8 +36,8 @@ signal close
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-#func _ready() -> void:
-#	pass
+func _ready() -> void:
+	_load_theme()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -48,6 +49,10 @@ signal close
 
 
 #  [PRIVATE_METHODS]
+func _load_theme() -> void:
+	label.set("custom_colors/font_color", API.theme.get_color(API.theme.PD1))
+	var state_normal: StyleBoxFlat = label.get("custom_styles/normal")
+	state_normal.set("border_color", API.theme.get_color(API.theme.PD1))
  
 
 #  [SIGNAL_METHODS]
