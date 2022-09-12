@@ -322,7 +322,8 @@ func _scoring_rules() -> int:
 
 
 func _update_panel_information() -> void:
-	total_stars.bbcode_text = str("Você completou o nível!\nConseguiu [color=#aa7bc3][b]", str(_scoring_rules()), "[/b][/color] estrelas.")
+	var color_bbtext: String = str(API.theme.get_color(API.theme.PB).to_html(false))
+	total_stars.bbcode_text = str("Você completou o nível!\nConseguiu [color=#" + color_bbtext + "][b]" + str(_scoring_rules()) + "[/b][/color] estrelas.")
 	total_time.text = timer_label.text
 	total_attempts.text = str(failed_attempt)
 
