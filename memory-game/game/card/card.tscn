@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://game/card/local_images/alma_de_gato.png" type="Texture" id=3]
 [ext_resource path="res://game/card/card.gd" type="Script" id=4]
+[ext_resource path="res://game/card/texture.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.4, 0.4, 0.4, 1 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 24
@@ -67,6 +71,22 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="BackColor" type="Button" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/hover = SubResource( 9 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Texture" type="TextureRect" parent="BackColor"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+
 [node name="Subtitle" type="Label" parent="."]
 visible = false
 anchor_right = 1.0
@@ -98,3 +118,4 @@ text = ""
 anims/turn = SubResource( 7 )
 
 [connection signal="pressed" from="." to="." method="_on_CardButton_pressed"]
+[connection signal="pressed" from="BackColor" to="." method="_on_CardButton_pressed"]

@@ -44,6 +44,7 @@ var _subtitle: String = "#" \
 onready var animation := $AnimationPlayer
 onready var subtitle_label := $Subtitle
 onready var lock_card_label := $LockCard
+onready var back_color := $BackColor
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -53,6 +54,7 @@ onready var lock_card_label := $LockCard
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
+	_load_theme()
 	#set_front_image(load("res://game/card/local_images/periquito_testinha.png"))
 	set_back_image(load("res://game/card/back_card.png"))
 	#texture_normal = get_front_image()
@@ -85,6 +87,7 @@ func set_state(new_state: int) -> void:
 			_state = new_state
 			#lock_card_label.visible = false
 			disabled = true
+			back_color.disabled = true
 			subtitle_label.visible = true
 			self_modulate = Color(0.65, 0.65, 0.65, 1.0) 
 		_:
@@ -145,14 +148,25 @@ func turn_animation() -> void:
 
 
 #  [PRIVATE_METHODS]
+func _load_theme():
+	var back_color_pressed: StyleBoxFlat = back_color.get("custom_styles/pressed")
+	back_color_pressed.set("bg_color", API.theme.get_color(API.theme.SB))
+	
+	var back_color_normal: StyleBoxFlat = back_color.get("custom_styles/normal")
+	back_color_normal.set("bg_color", API.theme.get_color(API.theme.SB))
+
+
 func _exchange_images() -> void:
 	match(_current_image): # enum State {FRONT, BACK, TURNNING, COMPLETED}
 		State.FRONT:
+			back_color.visible = true
 			texture_normal = _back_image
 		State.BACK:
+			back_color.visible = false
 			texture_normal = _front_image
 		_:
 			pass
+
 
 func _calculate_pivot_offset() -> void:
 	rect_pivot_offset.x = rect_size.x / 2
@@ -162,6 +176,7 @@ func _calculate_pivot_offset() -> void:
 #  [SIGNAL_METHODS]
 func _on_CardButton_pressed() -> void:
 	disabled = true
+	back_color.disabled = true
 	#lock_card_label.visible = true
 	turn_animation()
 	emit_signal("card_turned", self)

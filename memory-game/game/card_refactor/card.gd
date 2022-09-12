@@ -153,6 +153,7 @@ func _exchange_images() -> void:
 			texture_normal = _front_image
 		_:
 			pass
+		
 
 func _calculate_pivot_offset() -> void:
 	rect_pivot_offset.x = rect_size.x / 2
