@@ -110,8 +110,8 @@ func _request_game_logo() -> void:
 		add_child(http_request)
 		http_request.connect("request_completed", self, "_on_request_game_logo_step1")
 		request(http_request, str(get_resources()["foaf:img"][0]["@id"]))
-	else:
-		emit_signal("request_error", "RequestCommonOmeka._request_game_logo(): property not found")
+#	else:
+#		emit_signal("request_error", "RequestCommonOmeka._request_game_logo(): property not found")
  
 
 #  [SIGNAL_METHODS]
