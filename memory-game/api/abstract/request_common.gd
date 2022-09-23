@@ -23,10 +23,10 @@ signal all_request_common_completed
 
 
 #  [PRIVATE_VARIABLES]
-var _short_title: String = String() \
+var _short_title: String = "" \
 		setget set_short_title, get_short_title
 
-var _article_summary: String = String() \
+var _article_summary: String = "" \
 		setget set_article_summary, get_article_summary
 
 var _game_logo: ImageTexture = null \

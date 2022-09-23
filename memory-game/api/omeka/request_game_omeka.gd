@@ -135,20 +135,32 @@ func _on_request_cards_step1(_result: int, response_code: int, _headers: PoolStr
 #				else:
 #					emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): card subtitle, property not found")
 				
+				var use_original_media: bool = false
 				var image_type: String = String()
-				if json.result.has("o:media_type"): # EX. "image/png"
-					image_type = str(json.result["o:media_type"]).split("/")[1]
-				else:
-					emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): image format not found")
+				if use_original_media == true:
+					if json.result.has("o:media_type"): # EX. "image/png"
+						image_type = str(json.result["o:media_type"]).split("/")[1]
+					else:
+						emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): image format not found")
+					
+					if json.result.has("o:original_url"):
+						var http_request: HTTPRequest = HTTPRequest.new()
+						add_child(http_request)
+						http_request.connect("request_completed", self, "_on_request_cards_final", [request_counter, subtitle, image_type], 1)
+						request(http_request, str(json.result["o:original_url"]))
+					else:
+						emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): card image-url, property not found")
 				
-				# get cards image-url
-				if json.result.has("o:original_url"):
-					var http_request: HTTPRequest = HTTPRequest.new()
-					add_child(http_request)
-					http_request.connect("request_completed", self, "_on_request_cards_final", [request_counter, subtitle, image_type], 1)
-					request(http_request, str(json.result["o:original_url"]))
-#				else:
-#					emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): card image-url, property not found")
+				elif use_original_media == false:
+					image_type = "jpg"
+				
+					if json.result.has("o:thumbnail_urls"):
+						var http_request: HTTPRequest = HTTPRequest.new()
+						add_child(http_request)
+						http_request.connect("request_completed", self, "_on_request_cards_final", [request_counter, subtitle, image_type], 1)
+						request(http_request, str(json.result["o:thumbnail_urls"]["large"]))
+					else:
+						emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): card image-url, property not found")
 				
 			_:
 				emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): Unexpected results from JSON response")
