@@ -33,6 +33,8 @@ enum {
 	GREEN, # FIXED COLORS
 	BLACK, # FIXED COLORS
 	WHITE, # FIXED COLORS
+	LIGHTGRAY, # FIXED COLORS
+	DARKGRAY, # FIXED COLORS
 }
 
 
@@ -137,13 +139,17 @@ func get_color(name: int) -> Color:
 		
 		# FIXED COLORS
 		RED:
-			color = Color(Color.darkred)
+			color = Color("#F5333F")
 		GREEN:
-			color = Color(Color.darkgreen)
+			color = Color("#0A9E4E")
 		BLACK:
-			color = Color(Color.black)
+			color = Color("#000000")
 		WHITE:
-			color = Color(Color.white)
+			color = Color("#FFFFFF")
+		LIGHTGRAY:
+			color = Color("#EFEFEF")
+		DARKGRAY:
+			color = Color("#898989")
 
 	return color
 

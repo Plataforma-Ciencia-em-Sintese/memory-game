@@ -258,10 +258,6 @@ func _toggle_fullscreen_button_icon() -> void:
 			fullscreen.text = fullscreen_on
 
 func _scoring_rules() -> int:
-	var first_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/First")
-	var second_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Second")
-	var third_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Third")
-	
 	var target_attempt: int = 0
 	var margin_attempt: int = 0
 	var target_time: int = 0
@@ -296,7 +292,6 @@ func _scoring_rules() -> int:
 	
 	# two stars
 	elif get_timer_counter() < (target_time + margin_time) and failed_attempt < (target_attempt + margin_attempt):
-		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
 		if not stars_check:
 			stars = 2
 			stars_check = true
@@ -304,20 +299,36 @@ func _scoring_rules() -> int:
 	# one stars
 	elif (get_timer_counter() < (target_time + margin_time) and failed_attempt > (target_attempt + margin_attempt)) or \
 			(get_timer_counter() > (target_time + margin_time) and failed_attempt < (target_attempt + margin_attempt)):
-		second_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
-		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
 		if not stars_check:
 			stars = 1
 			stars_check = true
 	
 	# zero stars
 	elif get_timer_counter() > (target_time + margin_time) and failed_attempt > (target_attempt + margin_attempt):
-		first_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
-		second_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
-		third_star.set("custom_colors/font_color", Color(0.0, 0.0, 0.0, 0.1))
 		if not stars_check:
 			stars = 0
 			stars_check = true
+	
+	var first_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/First")
+	var second_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Second")
+	var third_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Third")
+	match(stars):
+		0:
+			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+		1:
+			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
+			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+		2:
+			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
+			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
+			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+		3:
+			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
+			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
+			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
 	
 	return stars
 
