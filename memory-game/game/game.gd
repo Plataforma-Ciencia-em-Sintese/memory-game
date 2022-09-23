@@ -217,7 +217,7 @@ func _make_grid(mode: int):
 			card_size = Vector2(180, 180)
 	
 # warning-ignore:integer_division
-	for _i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
+	for i in range(0, (total_cards/2)): # number of cards divided by 2 insertions
 		
 		var card: Dictionary = random_card()
 #		for child in grid.get_children():
@@ -229,6 +229,7 @@ func _make_grid(mode: int):
 			var new_card := CardButton.instance()
 			grid.add_child(new_card)
 			new_card.rect_min_size = card_size
+			new_card.set_id(i)
 			if card.has("image"):
 				new_card.set_front_image(card["image"])
 			if card.has("subtitle"):	
@@ -351,7 +352,7 @@ func _on_card_turned(card_instance) -> void:
 			#if card.get_state() == card.State.BACK:
 				#card.lock_card_label.visible = true
 		yield(get_tree().create_timer(1.0), "timeout")
-		if turned_cards[0].get_subtitle() == card_instance.get_subtitle():
+		if turned_cards[0].get_id() == card_instance.get_id():
 			card_instance.set_state(card_instance.State.COMPLETED)
 			turned_cards[0].set_state(turned_cards[0].State.COMPLETED)
 			turned_cards.clear()

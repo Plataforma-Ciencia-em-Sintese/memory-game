@@ -27,10 +27,13 @@ enum State {FRONT, BACK, TURNNING, COMPLETED}
 #  [PRIVATE_VARIABLES]
 var _state: int = State.FRONT \
 		setget set_state, get_state
-		
+
+var  _id: int = 0 \
+		setget set_id, get_id
+
 var _front_image = null \
 		setget set_front_image, get_front_image
-		
+
 var _back_image = null \
 		setget set_back_image, get_back_image
 
@@ -103,6 +106,14 @@ func set_state(new_state: int) -> void:
 
 func get_state() -> int:
 	return _state
+
+
+func set_id(new_value: int) -> void:
+	_id = new_value
+
+
+func get_id() -> int:
+	return _id
 
 
 func set_front_image(new_front_image) -> void:
