@@ -314,17 +314,17 @@ func _scoring_rules() -> int:
 	var third_star: Label = panel_information.get_node("GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/RecordContainer/Stars/Third")
 	match(stars):
 		0:
-			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
-			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
-			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.LIGHTGRAY))
+			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.LIGHTGRAY))
+			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.LIGHTGRAY))
 		1:
 			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
-			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
-			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.LIGHTGRAY))
+			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.LIGHTGRAY))
 		2:
 			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
 			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
-			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.RED))
+			third_star.set("custom_colors/font_color", API.theme.get_color(API.theme.LIGHTGRAY))
 		3:
 			first_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))
 			second_star.set("custom_colors/font_color", API.theme.get_color(API.theme.GREEN))

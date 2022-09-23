@@ -132,8 +132,7 @@ func _on_request_cards_step1(_result: int, response_code: int, _headers: PoolStr
 				var subtitle: String = String()
 				if json.result.has("bibo:shortDescription"):
 					subtitle = str(json.result["bibo:shortDescription"][0]["@value"])
-#				else:
-#					emit_signal("request_error", "RequestGameOmeka._on_request_cards_step1(): card subtitle, property not found")
+				
 				
 				var use_original_media: bool = false
 				var image_type: String = String()
