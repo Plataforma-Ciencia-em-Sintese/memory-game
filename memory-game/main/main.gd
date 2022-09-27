@@ -39,7 +39,7 @@ func _ready() -> void:
 		API.connect("all_request_completed", self, "_on_init_game")
 		API.connect("all_request_failed", self, "_on_return_error")
 	else:
-		loading_status.error()
+		loading_status.show_error()
 		print("\nTodas as solicitações falharam...\n")
 		print("\nJogo não pode ser carregado!\n")
 	
@@ -69,6 +69,6 @@ func _on_init_game() -> void:
 
 
 func _on_return_error() -> void:
-	loading_status.error()
+	loading_status.show_error()
 	print("\nTodas as solicitações falharam...\n")
 	print("\nJogo não pode ser carregado!\n")
