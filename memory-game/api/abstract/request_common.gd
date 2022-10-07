@@ -62,6 +62,7 @@ func get_short_title() -> String:
 
 func set_article_summary(new_value: String) -> void:
 	_article_summary = new_value
+	
 
 
 func get_article_summary() -> String:

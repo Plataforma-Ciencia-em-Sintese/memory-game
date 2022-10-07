@@ -99,7 +99,8 @@ func _request_article_summary() -> void:
 		set_article_summary(str(get_resources()["lom:description"][0]["@value"]))
 		emit_signal("request_article_summary_completed")
 	else:
-		emit_signal("request_error", "RequestCommonOmeka._request_article_summary(): property not found")
+		emit_signal("request_article_summary_completed")
+#		emit_signal("request_error", "RequestCommonOmeka._request_article_summary(): property not found")
 
 
 func _request_game_logo() -> void:

@@ -42,13 +42,22 @@ func _ready() -> void:
 	if parameters.has("skip"):
 		match(int(parameters["skip"])):
 			0:
-				get_tree().change_scene("res://resume/resume.tscn")
+				if API.common.get_article_summary() == "":
+					get_tree().change_scene("res://home/home.tscn")
+				else:
+					get_tree().change_scene("res://resume/resume.tscn")
 			1:
 				get_tree().change_scene("res://home/home.tscn")
 			_:
-				get_tree().change_scene("res://resume/resume.tscn")
+				if API.common.get_article_summary() == "":
+					get_tree().change_scene("res://home/home.tscn")
+				else:
+					get_tree().change_scene("res://resume/resume.tscn")
 	else:
-		get_tree().change_scene("res://resume/resume.tscn")
+		if API.common.get_article_summary() == "":
+			get_tree().change_scene("res://home/home.tscn")
+		else:
+			get_tree().change_scene("res://resume/resume.tscn")
 
 
 
