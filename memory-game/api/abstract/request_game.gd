@@ -7,6 +7,7 @@ extends Request
 
 
 #  [SIGNALS]
+# warning-ignore:unused_signal
 signal all_request_game_completed
 
 
@@ -48,7 +49,7 @@ var _cards: Array = Array() \
 
 #  [PUBLIC_METHODS]
 func set_cards(new_value: Array) -> void:
-	pass
+	_cards = new_value
 
 
 func get_cards() -> Array:

@@ -11,6 +11,7 @@ signal request_main_completed
 signal request_short_title_completed
 signal request_article_summary_completed
 signal request_game_logo_completed
+signal request_article_link_completed
 
 
 #  [ENUMS]
@@ -46,9 +47,10 @@ func _ready() -> void:
 	_request_short_title()
 	_request_article_summary()
 	_request_game_logo()
+	_request_article_link()
 	
 	
-	yield(self, "request_game_logo_completed")
+	yield(self, "request_article_link_completed")
 	# called upon completion of all requests
 	emit_signal("all_request_common_completed")
 	
@@ -97,10 +99,10 @@ func _request_article_summary() -> void:
 	
 	if get_resources().has("lom:description"):
 		set_article_summary(str(get_resources()["lom:description"][0]["@value"]))
-		emit_signal("request_article_summary_completed")
 	else:
-		emit_signal("request_article_summary_completed")
-#		emit_signal("request_error", "RequestCommonOmeka._request_article_summary(): property not found")
+		push_warning("RequestCommonOmeka._request_article_summary(): property not found")
+	
+	emit_signal("request_article_summary_completed")
 
 
 func _request_game_logo() -> void:
@@ -112,9 +114,27 @@ func _request_game_logo() -> void:
 		http_request.connect("request_completed", self, "_on_request_game_logo_step1")
 		request(http_request, str(get_resources()["foaf:img"][0]["@id"]))
 	else:
+		push_warning("RequestCommonOmeka._request_game_logo(): property not found")
 		emit_signal("request_game_logo_completed")
-		#emit_signal("request_error", "RequestCommonOmeka._request_game_logo(): property not found")
  
+
+func _request_article_link() -> void:
+	yield(self, "request_game_logo_completed")
+	
+	if get_resources().has("dcterms:isPartOf"):
+		if get_resources()["dcterms:isPartOf"][0].has("url"):
+			var url = get_resources()["dcterms:isPartOf"][0]["url"]
+			if url is String and url.begins_with("url"):
+					set_article_link(url)
+			else:
+				push_warning("RequestCommonOmeka._request_article_link(): the url is not valid")
+		else:
+			push_warning("RequestCommonOmeka._request_article_link(): the url is not valid")
+	else:
+		push_warning("RequestCommonOmeka._request_article_link(): property not found")
+	
+	emit_signal("request_article_link_completed")
+
 
 #  [SIGNAL_METHODS]
 func _on_request_main(_result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray) -> void:
@@ -153,7 +173,7 @@ func _on_request_game_logo_step1(_result: int, response_code: int, _headers: Poo
 				if json.result.has("o:media_type"): # EX. "image/png"
 					image_type = str(json.result["o:media_type"]).split("/")[1]
 				else:
-					emit_signal("request_error", "RequestCommonOmeka._on_request_game_logo_step1(): image format not found")
+					push_warning("RequestCommonOmeka._on_request_game_logo_step1(): image format not found")
 					
 				if json.result.has("o:original_url"):
 					var http_request: HTTPRequest = HTTPRequest.new()
@@ -161,13 +181,13 @@ func _on_request_game_logo_step1(_result: int, response_code: int, _headers: Poo
 					http_request.connect("request_completed", self, "_on_request_game_logo_final", [image_type])
 					request(http_request, str(json.result["o:original_url"]))
 				else:
-					emit_signal("request_error", "RequestCommonOmeka._on_request_game_logo_step1(): property not found")
+					push_warning("RequestCommonOmeka._on_request_game_logo_step1(): property not found")
 			
 			_:
-				emit_signal("request_error", "RequestCommonOmeka._on_request_game_logo_step1(): Unexpected results from JSON response")
+				push_warning("RequestCommonOmeka._on_request_game_logo_step1(): Unexpected results from JSON response")
 		
 	else:
-		emit_signal("request_error", str("RequestCommonOmeka._on_request_game_logo_step1(): response code return error: ", response_code))
+		push_warning(str("RequestCommonOmeka._on_request_game_logo_step1(): response code return error: ", response_code))
 
 
 func _on_request_game_logo_final(_result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray, image_type: String) -> void:
@@ -188,7 +208,7 @@ func _on_request_game_logo_final(_result: int, response_code: int, _headers: Poo
 				error = image.load_tga_from_buffer(body)
 
 		if error != OK:
-			emit_signal("request_error", "RequestCommonOmeka._on_request_game_logo_final(): image format is not supported")
+			push_warning("RequestCommonOmeka._on_request_game_logo_final(): image format is not supported")
 		
 		var image_texture: ImageTexture = ImageTexture.new()
 		image_texture.create_from_image(image)
@@ -196,4 +216,4 @@ func _on_request_game_logo_final(_result: int, response_code: int, _headers: Poo
 		emit_signal("request_game_logo_completed")
 		
 	else:
-		emit_signal("request_error", str("RequestCommonOmeka._on_request_game_logo_final(): response code return error: ", response_code))
+		push_warning(str("RequestCommonOmeka._on_request_game_logo_final(): response code return error: ", response_code))

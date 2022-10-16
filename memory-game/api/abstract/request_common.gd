@@ -7,6 +7,7 @@ extends Request
 
 
 #  [SIGNALS]
+# warning-ignore:unused_signal
 signal all_request_common_completed
 
 
@@ -31,6 +32,9 @@ var _article_summary: String = "" \
 
 var _game_logo: ImageTexture = null \
 		setget set_game_logo, get_game_logo
+
+var _article_link: String = "" \
+		setget set_article_link, get_article_link 
 
 
 #  [ONREADY_VARIABLES]
@@ -75,6 +79,14 @@ func set_game_logo(new_value: ImageTexture) -> void:
 
 func get_game_logo() -> ImageTexture:
 	return _game_logo
+
+
+func set_article_link(new_value: String) -> void:
+	_article_link = new_value
+
+
+func get_article_link() -> String:
+	return _article_link
 
 
 #  [PRIVATE_METHODS]

@@ -7,6 +7,7 @@ extends Node
 
 
 #  [SIGNALS]
+# warning-ignore:unused_signal
 signal request_error(request_failed)
 
 
