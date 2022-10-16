@@ -34,7 +34,10 @@ var _game_logo: ImageTexture = null \
 		setget set_game_logo, get_game_logo
 
 var _article_link: String = "" \
-		setget set_article_link, get_article_link 
+		setget set_article_link, get_article_link
+
+var _content_credits: String = "" \
+		setget set_content_credits, get_content_credits
 
 
 #  [ONREADY_VARIABLES]
@@ -87,6 +90,14 @@ func set_article_link(new_value: String) -> void:
 
 func get_article_link() -> String:
 	return _article_link
+
+
+func set_content_credits(new_value: String) -> void:
+	_content_credits = new_value
+
+
+func get_content_credits() -> String:
+	return _content_credits
 
 
 #  [PRIVATE_METHODS]

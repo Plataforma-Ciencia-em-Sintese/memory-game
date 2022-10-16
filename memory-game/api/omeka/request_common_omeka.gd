@@ -12,6 +12,7 @@ signal request_short_title_completed
 signal request_article_summary_completed
 signal request_game_logo_completed
 signal request_article_link_completed
+signal request_content_credits_completed
 
 
 #  [ENUMS]
@@ -48,9 +49,10 @@ func _ready() -> void:
 	_request_article_summary()
 	_request_game_logo()
 	_request_article_link()
+	_request_content_credits()
 	
 	
-	yield(self, "request_article_link_completed")
+	yield(self, "request_content_credits_completed")
 	# called upon completion of all requests
 	emit_signal("all_request_common_completed")
 	
@@ -134,6 +136,20 @@ func _request_article_link() -> void:
 		push_warning("RequestCommonOmeka._request_article_link(): property not found")
 	
 	emit_signal("request_article_link_completed")
+
+
+func _request_content_credits() -> void:
+	yield(self, "request_article_link_completed")
+	
+	if get_resources().has("bibframe:credits"):
+		if get_resources()["bibframe:credits"][0].has("@value"):
+			set_content_credits(str(get_resources()["bibframe:credits"][0]["@value"]))
+		else:
+			push_warning("RequestCommonOmeka._request_content_credits(): property not found")
+	else:
+		push_warning("RequestCommonOmeka._request_content_credits(): property not found")
+	
+	emit_signal("request_content_credits_completed")
 
 
 #  [SIGNAL_METHODS]

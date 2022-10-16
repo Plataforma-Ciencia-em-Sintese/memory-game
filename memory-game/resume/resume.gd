@@ -40,7 +40,6 @@ func _ready() -> void:
 	
 	article_summary.text = API.common.get_article_summary() #+ "\n\n Bom Divertimento!"
 	
-	prints("link: ", API.common.get_article_link())
 	if API.common.get_article_link() == "":
 		redirect.disabled = true
 
