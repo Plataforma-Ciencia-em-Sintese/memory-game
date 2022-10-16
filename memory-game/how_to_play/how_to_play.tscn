@@ -272,6 +272,7 @@ custom_constants/separation = 30
 [node name="Button" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
 margin_left = 1342.0
 margin_right = 1462.0
+hint_tooltip = "Fechar"
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 16 )
 custom_styles/hover = SubResource( 17 )
