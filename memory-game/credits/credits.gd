@@ -26,7 +26,7 @@ extends Control
 
 #  [ONREADY_VARIABLES]
 onready var label: Label = $MarginContainer/VBoxContainer/Panel/Label
-
+onready var content: Label = $MarginContainer/VBoxContainer/Panel/MarginContainer/ScrollContainer/VBoxContainer/Content
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -36,6 +36,9 @@ onready var label: Label = $MarginContainer/VBoxContainer/Panel/Label
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
 	_load_theme()
+	
+	if API.common.get_content_credits() != "":
+		content.text = API.common.get_content_credits()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
