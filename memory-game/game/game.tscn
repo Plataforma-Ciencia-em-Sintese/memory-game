@@ -1030,6 +1030,7 @@ text = ""
 script = SubResource( 88 )
 
 [node name="FullScreen" parent="MarginContainer/VBoxContainer/BarContainer" instance=ExtResource( 6 )]
+self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 150.0
 margin_top = 1.0
 margin_right = 270.0
@@ -1042,6 +1043,7 @@ custom_styles/pressed = SubResource( 91 )
 custom_styles/focus = SubResource( 92 )
 custom_styles/disabled = SubResource( 93 )
 custom_styles/normal = SubResource( 94 )
+disabled = true
 text = ""
 script = SubResource( 95 )
 
