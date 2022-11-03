@@ -25,6 +25,7 @@ extends CanvasLayer
 
 
 #  [ONREADY_VARIABLES]
+var button: Button = null
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -41,20 +42,29 @@ extends CanvasLayer
 #func _process(_delta: float) -> void:
 #	pass
 
+func _enter_tree() -> void:
+	button = $Button
+	get_viewport().connect("size_changed", self, "_on_size_changed")
 
 #  [PUBLIC_METHODS]
 
 
 #  [PRIVATE_METHODS]
+func _toggle_fullscreen_button_icon() -> void:
+	var fullscreen_on: String = ""
+	var fullscreen_off: String = ""
+	match(OS.window_fullscreen):
+		true:
+			button.text = fullscreen_off
+		false:
+			button.text = fullscreen_on
+	
  
 
 #  [SIGNAL_METHODS] 
 func _on_Button_pressed() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
-	var fullscreen_on: String = ""
-	var fullscreen_off: String = ""
-	match(OS.window_fullscreen):
-		true:
-			$Button.text = fullscreen_off
-		false:
-			$Button.text = fullscreen_on
+	_toggle_fullscreen_button_icon()
+
+func _on_size_changed() -> void:
+	_toggle_fullscreen_button_icon()
