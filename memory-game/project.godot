@@ -70,6 +70,7 @@ config/icon="res://icon.png"
 
 ChangeLevel="*res://home/change_level.gd"
 API="*res://api/api.gd"
+FullscreenButton="*res://fullscreen/fullscreen_button.tscn"
 
 [debug]
 
