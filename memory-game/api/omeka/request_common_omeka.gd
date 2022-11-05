@@ -14,6 +14,7 @@ signal request_game_logo_completed
 signal request_article_link_completed
 signal request_content_credits_completed
 signal request_mascot_completed
+signal request_pet_completed
 
 
 #  [ENUMS]
@@ -52,9 +53,10 @@ func _ready() -> void:
 	_request_article_link()
 	_request_content_credits()
 	_request_mascot()
+	_request_pet()
 	
 	
-	yield(self, "request_mascot_completed")
+	yield(self, "request_pet_completed")
 	# called upon completion of all requests
 	emit_signal("all_request_common_completed")
 	
@@ -156,7 +158,7 @@ func _request_content_credits() -> void:
 
 func _request_mascot() -> void:
 	yield(self, "request_content_credits_completed")
-	#bibframe:digitalCharacteristic
+	
 	if get_resources().has("bibframe:digitalCharacteristic"):
 		if get_resources()["bibframe:digitalCharacteristic"][0].has("@id"):
 			var http_request: HTTPRequest = HTTPRequest.new()
@@ -168,6 +170,22 @@ func _request_mascot() -> void:
 			emit_signal("request_error", "RequestCommonOmeka._request_mascot(): property not found")
 	else:
 		emit_signal("request_error", "RequestCommonOmeka._request_mascot(): property not found")
+
+
+func _request_pet() -> void:
+	yield(self, "request_mascot_completed")
+	
+	if get_resources().has("sioc:avatar"):
+		if get_resources()["sioc:avatar"][0].has("@id"):
+			var http_request: HTTPRequest = HTTPRequest.new()
+			add_child(http_request)
+			http_request.connect("request_completed", self, "_on_request_pet_step1")
+			request(http_request, str(get_resources()["sioc:avatar"][0]["@id"]))
+
+		else:
+			emit_signal("request_error", "RequestCommonOmeka._request_pet(): property not found")
+	else:
+		emit_signal("request_error", "RequestCommonOmeka._request_pet(): property not found")
 
 
 #  [SIGNAL_METHODS]
@@ -336,3 +354,88 @@ func _on_request_mascot_final(_result: int, response_code: int, _headers: PoolSt
 		
 	else:
 		push_warning(str("RequestCommonOmeka._on_request_mascot_final()): response code return error: ", response_code))
+
+
+func _on_request_pet_step1(_result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray) -> void:
+	if response_code == 200:
+		var json := JSON.parse(body.get_string_from_utf8())
+		#print(str(JSON.print(json.result, "\t")))
+		
+		match(typeof(json.result)):
+			TYPE_DICTIONARY:
+					
+				if json.result.has("foaf:img"):
+					if json.result["foaf:img"][0].has("@id"):
+						var http_request: HTTPRequest = HTTPRequest.new()
+						add_child(http_request)
+						http_request.connect("request_completed", self, "_on_request_pet_step2")
+						request(http_request, str(json.result["foaf:img"][0]["@id"]))
+					
+					else:
+						emit_signal("request_error", "RequestCommonOmeka._on_request_pet_step1(): property not found")
+				else:
+					emit_signal("request_error", "RequestCommonOmeka._on_request_pet_step1(): property not found")
+			
+			_:
+				push_warning("RequestCommonOmeka._on_request_pet_step1(): Unexpected results from JSON response")
+		
+	else:
+		push_warning(str("RequestCommonOmeka._on_request_pet_step1(): response code return error: ", response_code))
+
+
+func _on_request_pet_step2(_result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray) -> void:
+	if response_code == 200:
+		var json := JSON.parse(body.get_string_from_utf8())
+		#print(str(JSON.print(json.result, "\t")))
+		
+		match(typeof(json.result)):
+			TYPE_DICTIONARY:
+				
+				var image_type: String = String()
+				if json.result.has("o:media_type"): # EX. "image/png"
+					image_type = str(json.result["o:media_type"]).split("/")[1]
+				else:
+					emit_signal("request_error", "RequestCommonOmeka._on_request_pet_step2(): image format not found")
+					
+				if json.result.has("o:original_url"):
+					var http_request: HTTPRequest = HTTPRequest.new()
+					add_child(http_request)
+					http_request.connect("request_completed", self, "_on_request_pet_final", [image_type])
+					request(http_request, str(json.result["o:original_url"]))
+				else:
+					emit_signal("request_error", "RequestCommonOmeka._on_request_pet_step2(): property not found")
+			
+			_:
+				push_warning("RequestCommonOmeka._on_request_pet_step2(): Unexpected results from JSON response")
+		
+	else:
+		push_warning(str("RequestCommonOmeka._on_request_pet_step2(): response code return error: ", response_code))
+
+
+func _on_request_pet_final(_result: int, response_code: int, _headers: PoolStringArray, body: PoolByteArray, image_type: String) -> void:
+	if response_code == 200:
+		
+		var image: Image = Image.new()
+		var error: int = 0
+		match(image_type.to_upper()):
+			"JPG", "JPEG":
+				error = image.load_jpg_from_buffer(body)
+			"PNG":
+				error = image.load_png_from_buffer(body)
+			"WEBP":
+				error = image.load_webp_from_buffer(body)
+			"BMP":
+				error = image.load_bmp_from_buffer(body)
+			"TGA":
+				error = image.load_tga_from_buffer(body)
+
+		if error != OK:
+			emit_signal("request_error", "RequestCommonOmeka._on_request_pet_final()): image format is not supported")
+		
+		var image_texture: ImageTexture = ImageTexture.new()
+		image_texture.create_from_image(image)
+		set_pet(image_texture)
+		emit_signal("request_pet_completed")
+		
+	else:
+		push_warning(str("RequestCommonOmeka._on_request_pet_final()): response code return error: ", response_code))

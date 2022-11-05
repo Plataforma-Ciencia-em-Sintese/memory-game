@@ -42,6 +42,10 @@ var _content_credits: String = "" \
 var _mascot: ImageTexture = null \
 		setget set_mascot, get_mascot
 
+var _pet: ImageTexture = null \
+		setget set_pet, get_pet
+
+
 
 #  [ONREADY_VARIABLES]
 
@@ -109,6 +113,14 @@ func set_mascot(new_value: ImageTexture) -> void:
 
 func get_mascot() -> ImageTexture:
 	return _mascot
+
+
+func set_pet(new_value: ImageTexture) -> void:
+	_pet = new_value
+
+
+func get_pet() -> ImageTexture:
+	return _pet
 
 
 #  [PRIVATE_METHODS]

@@ -27,7 +27,7 @@ extends Control
 #  [ONREADY_VARIABLES]
 onready var article_summary: Label = $MarginContainer/Panel/VBoxContainer/HBoxContainer2/Panel/MarginContainer/VBoxContainer/Text
 onready var redirect: Button = $MarginContainer/Panel/VBoxContainer/HBoxContainer2/Panel/MarginContainer/VBoxContainer/Redirect
-
+onready var pet: TextureRect = $MarginContainer/Panel/VBoxContainer/HBoxContainer2/AspectRatioContainer/TextureRect
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -37,6 +37,8 @@ onready var redirect: Button = $MarginContainer/Panel/VBoxContainer/HBoxContaine
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
 	_load_theme()
+	
+	pet.texture = API.common.get_pet()
 	
 	article_summary.text = API.common.get_article_summary() #+ "\n\n Bom Divertimento!"
 	

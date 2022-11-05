@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/components/background/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/themes/default/personagem_tubo_ensaio.png" type="Texture" id=3]
+[ext_resource path="res://assets/placeholder.png" type="Texture" id=3]
 [ext_resource path="res://resume/resume.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/components/theme_button_icon/theme_button_icon.tscn" type="PackedScene" id=6]
@@ -133,6 +133,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 3 )
 expand = true
+stretch_mode = 6
 
 [node name="Panel" type="Panel" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer2"]
 margin_left = 789.0
