@@ -33,7 +33,7 @@ onready var time_counter: Label = $GlobalContainer/MarginContainer/VBoxContainer
 onready var attempts_counter: Label = $GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/AttemptsContainer/TotalAttempts
 onready var hide: Button = $GlobalContainer/Hide
 onready var show: Button = $"../ShowPanelInformation"
-
+onready var character_image: TextureRect = $GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/Character
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -43,6 +43,8 @@ onready var show: Button = $"../ShowPanelInformation"
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
 	_load_theme()
+	character_image.texture = API.common.get_mascot()
+	
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]

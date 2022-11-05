@@ -38,6 +38,9 @@ var _article_link: String = "" \
 
 var _content_credits: String = "" \
 		setget set_content_credits, get_content_credits
+		
+var _mascot: ImageTexture = null \
+		setget set_mascot, get_mascot
 
 
 #  [ONREADY_VARIABLES]
@@ -98,6 +101,14 @@ func set_content_credits(new_value: String) -> void:
 
 func get_content_credits() -> String:
 	return _content_credits
+
+
+func set_mascot(new_value: ImageTexture) -> void:
+	_mascot = new_value
+
+
+func get_mascot() -> ImageTexture:
+	return _mascot
 
 
 #  [PRIVATE_METHODS]
