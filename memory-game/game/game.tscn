@@ -1002,7 +1002,7 @@ margin_right = 1691.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 10
+custom_constants/separation = 5
 
 [node name="BarContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 1462.0
@@ -1115,9 +1115,9 @@ selected_color = 1
 [node name="GameContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 711.0
-margin_top = 573.0
+margin_top = 571.0
 margin_right = 751.0
-margin_bottom = 613.0
+margin_bottom = 611.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 custom_styles/panel = SubResource( 9 )
