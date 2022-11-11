@@ -43,7 +43,6 @@ func _ready() -> void:
 			set_secondary_color()
 		_:
 			set_primary_color()
-	
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
