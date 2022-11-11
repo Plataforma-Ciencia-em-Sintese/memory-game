@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/components/background/background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/components/theme_button_icon/theme_button_icon.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/components/theme_button/theme_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/themes/default/Vector_24.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 1, 1, 1, 0.627451 )
@@ -124,6 +125,12 @@ custom_constants/separation = 244
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer2"]
 margin_right = 545.0
 margin_bottom = 628.0
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer2/AspectRatioContainer"]
+margin_top = 9.0
+margin_right = 545.0
+margin_bottom = 619.0
+texture = ExtResource( 8 )
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer2/AspectRatioContainer"]
 margin_right = 545.0
