@@ -26,7 +26,7 @@ extends Control
 
 #  [ONREADY_VARIABLES]
 onready var animation := $AnimationPlayer
-
+onready var image_logo := $Logos
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -35,6 +35,8 @@ onready var animation := $AnimationPlayer
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
+	image_logo.texture = API.common.get_sponsors_logo()
+	
 	animation.play("fade")
 	yield(animation, "animation_finished")
 	
