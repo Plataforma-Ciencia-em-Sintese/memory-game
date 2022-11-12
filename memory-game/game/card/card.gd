@@ -58,8 +58,8 @@ onready var back_color := $BackColor
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
 	_load_theme()
-	#set_front_image(load("res://game/card/local_images/periquito_testinha.png"))
-	set_back_image(load("res://game/card/back_card.png"))
+	#set_front_image(load("res://assets/placeholder.png"))
+	set_back_image(load("res://assets/placeholder.png"))
 	#texture_normal = get_front_image()
 
 

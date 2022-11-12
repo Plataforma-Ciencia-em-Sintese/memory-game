@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://game/card/local_images/alma_de_gato.png" type="Texture" id=3]
+[ext_resource path="res://assets/placeholder.png" type="Texture" id=3]
 [ext_resource path="res://game/card/card.gd" type="Script" id=4]
 [ext_resource path="res://game/card/texture.png" type="Texture" id=5]
 
