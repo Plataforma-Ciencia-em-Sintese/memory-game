@@ -45,6 +45,9 @@ var _mascot: ImageTexture = null \
 var _pet: ImageTexture = null \
 		setget set_pet, get_pet
 
+var _sponsors_logo: ImageTexture = null \
+		setget set_sponsors_logo, get_sponsors_logo
+
 
 
 #  [ONREADY_VARIABLES]
@@ -121,6 +124,14 @@ func set_pet(new_value: ImageTexture) -> void:
 
 func get_pet() -> ImageTexture:
 	return _pet
+
+
+func set_sponsors_logo(new_value: ImageTexture) -> void:
+	_sponsors_logo = new_value
+
+
+func get_sponsors_logo() -> ImageTexture:
+	return _sponsors_logo
 
 
 #  [PRIVATE_METHODS]
