@@ -352,11 +352,11 @@ func _on_add_cards() -> void:
 
 func _on_card_turned(card_instance) -> void:
 	emit_signal("start_timer")
-	var restart_button: Button = $MarginContainer/VBoxContainer/BarContainer/Restart
+	#var restart_button: Button = $MarginContainer/VBoxContainer/BarContainer/Restart
 	
 	if turned_cards.size() == 0:
 		turned_cards.append(card_instance)
-		restart_button.disabled = true
+		#restart_button.disabled = true
 		
 		return
 	if turned_cards.size() == 1:
@@ -370,7 +370,7 @@ func _on_card_turned(card_instance) -> void:
 			card_instance.set_state(card_instance.State.COMPLETED)
 			turned_cards[0].set_state(turned_cards[0].State.COMPLETED)
 			turned_cards.clear()
-			restart_button.disabled = false
+			#restart_button.disabled = false
 		else:
 			card_instance.turn_animation()
 			turned_cards[0].turn_animation()
@@ -383,7 +383,7 @@ func _on_card_turned(card_instance) -> void:
 			#turned_cards[0].lock_card_label.visible = false
 			
 			turned_cards.clear()
-			restart_button.disabled = false
+			#restart_button.disabled = false
 			emit_signal("failed_attempt")
 			
 		for card in grid.get_children():
