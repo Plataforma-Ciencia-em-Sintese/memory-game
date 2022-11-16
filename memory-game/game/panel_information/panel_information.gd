@@ -68,51 +68,51 @@ func _load_theme() -> void:
 	
 	hide.set("custom_colors/font_color", API.theme.get_color(API.theme.WHITE))
 	hide.set("custom_colors/font_color_hover", API.theme.get_color(API.theme.WHITE))
-	hide.set("custom_colors/font_color_pressed", API.theme.get_color(API.theme.PB))
+	hide.set("custom_colors/font_color_pressed", API.theme.get_color(API.theme.SB))
 	
 	var hide_state_hover: StyleBoxFlat = hide.get("custom_styles/hover")
-	hide_state_hover.set("bg_color", API.theme.get_color(API.theme.PL1))
-	hide_state_hover.set("border_color", API.theme.get_color(API.theme.PD2))
+	hide_state_hover.set("bg_color", API.theme.get_color(API.theme.SL1))
+	hide_state_hover.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var hide_state_pressed: StyleBoxFlat = hide.get("custom_styles/pressed")
 	hide_state_pressed.set("bg_color", API.theme.get_color(API.theme.WHITE))
-	hide_state_pressed.set("border_color", API.theme.get_color(API.theme.PD2))
+	hide_state_pressed.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var hide_state_focus: StyleBoxFlat = hide.get("custom_styles/focus")
-	hide_state_focus.set("bg_color", API.theme.get_color(API.theme.PL1))
-	hide_state_focus.set("border_color", API.theme.get_color(API.theme.PD2))
+	hide_state_focus.set("bg_color", API.theme.get_color(API.theme.SL1))
+	hide_state_focus.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var hide_state_disabled: StyleBoxFlat = hide.get("custom_styles/disabled")
-	hide_state_disabled.set("bg_color", API.theme.get_color(API.theme.PB))
-	hide_state_disabled.set("border_color", API.theme.get_color(API.theme.PD2))
+	hide_state_disabled.set("bg_color", API.theme.get_color(API.theme.SB))
+	hide_state_disabled.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var hide_state_normal: StyleBoxFlat = hide.get("custom_styles/normal")
-	hide_state_normal.set("bg_color", API.theme.get_color(API.theme.PB))
-	hide_state_normal.set("border_color", API.theme.get_color(API.theme.PD2))
+	hide_state_normal.set("bg_color", API.theme.get_color(API.theme.SB))
+	hide_state_normal.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	show.set("custom_colors/font_color", API.theme.get_color(API.theme.WHITE))
 	show.set("custom_colors/font_color_hover", API.theme.get_color(API.theme.WHITE))
-	show.set("custom_colors/font_color_pressed", API.theme.get_color(API.theme.PB))
+	show.set("custom_colors/font_color_pressed", API.theme.get_color(API.theme.SB))
 	
 	var show_state_hover: StyleBoxFlat = show.get("custom_styles/hover")
-	show_state_hover.set("bg_color", API.theme.get_color(API.theme.PL1))
-	show_state_hover.set("border_color", API.theme.get_color(API.theme.PD2))
+	show_state_hover.set("bg_color", API.theme.get_color(API.theme.SL1))
+	show_state_hover.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var show_state_pressed: StyleBoxFlat = show.get("custom_styles/pressed")
 	show_state_pressed.set("bg_color", API.theme.get_color(API.theme.WHITE))
-	show_state_pressed.set("border_color", API.theme.get_color(API.theme.PD2))
+	show_state_pressed.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var show_state_focus: StyleBoxFlat = show.get("custom_styles/focus")
-	show_state_focus.set("bg_color", API.theme.get_color(API.theme.PL1))
-	show_state_focus.set("border_color", API.theme.get_color(API.theme.PD2))
+	show_state_focus.set("bg_color", API.theme.get_color(API.theme.SL1))
+	show_state_focus.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var show_state_disabled: StyleBoxFlat = show.get("custom_styles/disabled")
-	show_state_disabled.set("bg_color", API.theme.get_color(API.theme.PB))
-	show_state_disabled.set("border_color", API.theme.get_color(API.theme.PD2))
+	show_state_disabled.set("bg_color", API.theme.get_color(API.theme.SB))
+	show_state_disabled.set("border_color", API.theme.get_color(API.theme.SD2))
 	
 	var show_state_normal: StyleBoxFlat = show.get("custom_styles/normal")
-	show_state_normal.set("bg_color", API.theme.get_color(API.theme.PB))
-	show_state_normal.set("border_color", API.theme.get_color(API.theme.PD2))
+	show_state_normal.set("bg_color", API.theme.get_color(API.theme.SB))
+	show_state_normal.set("border_color", API.theme.get_color(API.theme.SD2))
  
 
 #  [SIGNAL_METHODS]
