@@ -23,26 +23,23 @@
 # [UNRELEASED] - YYYY-MM-DD
 
 ### ADDED
-- time counter.
-- implemented splash screen.
-- implemented article summary screen.
-- implemented credits screen.
-- implemented home screen.
-- tooltips for general interface icon buttons.
-- devmode on game screen (key 0).
 
 
 ### CHANGED
-- text font.
-- theme for game scene.
+
 
 ### DEPRECATED
 
+
 ### REMOVED
+- old full screen button on game screen
 
 ### FIXED
-- grids per card level.
-- card caption display.
-- user interface elements and duration of animations.
+
 
 ### SECURITY
+
+
+
+
+# 1.2.0-alpha 2022-11-16
