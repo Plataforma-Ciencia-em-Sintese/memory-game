@@ -74,7 +74,6 @@ func _ready() -> void:
 	set_current_mode(ChangeLevel.request_mode)
 	
 	get_tree().get_root().connect("size_changed", self, "_on_window_size_changed")
-	_toggle_fullscreen_button_icon()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -248,15 +247,6 @@ func _reset_counters() -> void:
 	failed_attempt = 0
 
 
-func _toggle_fullscreen_button_icon() -> void:
-	var fullscreen_on: String = ""
-	var fullscreen_off: String = ""
-	match(OS.window_fullscreen):
-		true:
-			fullscreen.text = fullscreen_off
-		false:
-			fullscreen.text = fullscreen_on
-
 func _scoring_rules() -> int:
 	var target_attempt: int = 0
 	var margin_attempt: int = 0
@@ -343,7 +333,6 @@ func _update_panel_information() -> void:
 #  [SIGNAL_METHODS]
 func _on_window_size_changed() -> void:
 	dev_mode.visible = false
-	_toggle_fullscreen_button_icon()
 
 
 func _on_add_cards() -> void:
@@ -459,11 +448,6 @@ func _on_DevLevel3_pressed() -> void:
 	if turned_cards.empty():
 		_reset_counters()
 		set_current_mode(GameMode.HARD)
-
-
-func _on_FullScreen_pressed() -> void:
-	OS.window_fullscreen = !OS.window_fullscreen
-	_toggle_fullscreen_button_icon()
 
 
 func _on_show_PanelInformation() -> void:

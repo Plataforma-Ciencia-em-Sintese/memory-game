@@ -1501,7 +1501,6 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BarContainer/Home" to="." method="_on_Home_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/BarContainer/FullScreen" to="." method="_on_FullScreen_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BarContainer/Help" to="." method="_on_Help_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BarContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
