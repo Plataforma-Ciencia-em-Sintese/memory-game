@@ -43,7 +43,7 @@ var _timer_counter: int = int() \
 
 #  [ONREADY_VARIABLES]
 onready var CardButton := preload("res://game/card/card.tscn")
-onready var HowToPlay := preload("res://how_to_play/how_to_play.tscn")
+onready var HowToPlay := preload("res://game/how_to_play/how_to_play.tscn")
 onready var grid := $"MarginContainer/VBoxContainer/GameContainer/MarginContainer/GridContainer"
 onready var timer_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Time"
 onready var level_label := $"MarginContainer/VBoxContainer/BarContainer/Container/Level"
