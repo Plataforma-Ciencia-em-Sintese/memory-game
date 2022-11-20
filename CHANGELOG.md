@@ -26,6 +26,7 @@
 
 
 ### CHANGED
+- rearranging project folders
 
 
 ### DEPRECATED
