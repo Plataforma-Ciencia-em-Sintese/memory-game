@@ -36,7 +36,7 @@
 - old full screen button on game screen
 
 ### FIXED
-
+- visibility, link button on resume scene
 
 ### SECURITY
 
