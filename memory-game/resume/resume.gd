@@ -44,6 +44,7 @@ func _ready() -> void:
 	
 	if API.common.get_article_link() == "":
 		redirect.disabled = true
+		redirect.set("modulate", Color(1.0, 1.0, 1.0, 0.0))
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
