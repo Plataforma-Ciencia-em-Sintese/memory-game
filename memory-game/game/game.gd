@@ -18,7 +18,6 @@ enum GameMode {EASY, MEDIUM, HARD}
 
 
 #  [CONSTANTS]
-#const CardButton := preload("res://game/card_button.tscn")
 
 
 #  [EXPORTED_VARIABLES]
@@ -26,6 +25,7 @@ enum GameMode {EASY, MEDIUM, HARD}
 
 #  [PUBLIC_VARIABLES]
 var failed_attempt: int = 0
+#var panel_information = null
 
 
 #  [PRIVATE_VARIABLES]
@@ -65,12 +65,14 @@ onready var show_panel_information := $ShowPanelInformation
 
 #  [BUILT-IN_VURTUAL_METHOD]
 func _ready() -> void:
+	
 	_load_theme()
 	
 	connect("add_cards", self, "_on_add_cards")
 	connect("failed_attempt", self, "_on_failed_attempt")
 	connect("start_timer", self, "_on_start_timer")
 	connect("show_panel_information", self, "_on_show_PanelInformation")
+	
 	set_current_mode(ChangeLevel.request_mode)
 	
 	get_tree().get_root().connect("size_changed", self, "_on_window_size_changed")

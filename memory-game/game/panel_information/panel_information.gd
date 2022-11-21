@@ -7,6 +7,10 @@ extends Panel
 
 
 #  [SIGNALS]
+signal button_next_level_pressed
+signal button_restart_level_pressed
+signal button_hide_pressed
+signal button_show_pressed
 
 
 #  [ENUMS]
@@ -34,6 +38,7 @@ onready var attempts_counter: Label = $GlobalContainer/MarginContainer/VBoxConta
 onready var hide: Button = $GlobalContainer/Hide
 onready var show: Button = $"../ShowPanelInformation"
 onready var character_image: TextureRect = $GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/Character
+
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -113,6 +118,7 @@ func _load_theme() -> void:
 	var show_state_normal: StyleBoxFlat = show.get("custom_styles/normal")
 	show_state_normal.set("bg_color", API.theme.get_color(API.theme.SB))
 	show_state_normal.set("border_color", API.theme.get_color(API.theme.SD2))
- 
+
 
 #  [SIGNAL_METHODS]
+
